@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Vakiljoo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_register">Register</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="iamVakil">وکیل هستم</string>
+    <string name="iamMovakel">موکل هستم</string>
+    <string name="whoAreYou">شما... ؟</string>
+    <string name="inputYourData">لطفا مشخصات خود را وارد کنید تا یک کد فعالسازی برای شما پیامک شود.</string>
+    <string name="getCodeTxt">یک کد برای شما پیامک شده است لطفا آنرا در کادر زیر وارد نمایید.</string>
+    <string name="notDaryaftTxt">آیا رمز را دریافت نکرده اید؟</string>
+</resources>
