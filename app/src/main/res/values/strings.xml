@@ -22,4 +22,6 @@
     <string name="inputYourData">لطفا مشخصات خود را وارد کنید تا یک کد فعالسازی برای شما پیامک شود.</string>
     <string name="getCodeTxt">یک کد برای شما پیامک شده است لطفا آنرا در کادر زیر وارد نمایید.</string>
     <string name="notDaryaftTxt">آیا رمز را دریافت نکرده اید؟</string>
+    <string name="name">نام</string>
+    <string name="family_name">نام خانوادگی</string>
 </resources>
