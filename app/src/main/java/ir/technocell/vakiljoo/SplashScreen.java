@@ -91,13 +91,14 @@ public class SplashScreen extends AppCompatActivity {
                     for(int c=0;c<jsonArray.length();c++)
                     {
                         JSONObject object=jsonArray.getJSONObject(c);
-                       mapUser.put("User_ID",object.getString("U_ID"));
+                        mapUser.put("User_ID",object.getString("U_ID"));
                         mapUser.put("U_Name_Show",object.getString("U_Name"));
                         mapUser.put("U_Family_Show",object.getString("U_Family"));
                         mapUser.put("U_Telephone_Show",object.getString("U_Telephone"));
                         mapUser.put("U_Money",object.getString("U_Money"));
                         mapUser.put("U_Type",object.getString("U_Type"));
                         mapUser.put("U_ProfilePic",object.getString("U_ProfilePic"));
+
                     }
                     SetOnlineTime();
 

@@ -2,6 +2,7 @@ package ir.technocell.vakiljoo;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -49,6 +51,7 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.raycoarana.codeinputview.CodeInputView;
 
@@ -100,12 +103,12 @@ public class Register extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         mViewPager.setOffscreenPageLimit(1);
-        mViewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+       mViewPager.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View view, MotionEvent motionEvent) {
+               return false;
+           }
+       });
 
 
     }
@@ -141,7 +144,7 @@ public class Register extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String SMS_URL="http://vakiljoo.com/AppData/smsService.php";
         private static final String USER_URL="http://vakiljoo.com/AppData/Users.php";
-        private HashMap<String,String> userData=new HashMap<>();
+        private static final HashMap<String,String> userData=new HashMap<>();
         private Button mVakilBtn,mMovakelBtn;
         private FancyButton mRegisterBtn,mVorodBtn,mSendCodeTwice,mTimerBtn
                 ,mPrvanehImage,mSendMoreDataBtn;
@@ -177,6 +180,10 @@ public class Register extends AppCompatActivity {
         public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                                  Bundle savedInstanceState) {
             final View[] rootView = {null};
+            RQ=Volley.newRequestQueue(getContext());
+            userPrefrence=PreferenceManager.getDefaultSharedPreferences(getContext());
+            userDataEdit=userPrefrence.edit();
+
             if(getArguments().getInt(ARG_SECTION_NUMBER)==1)
             {
                 getActivity().runOnUiThread(new Runnable() {
@@ -187,14 +194,15 @@ public class Register extends AppCompatActivity {
                         mVakilBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                isVakil="lawyer";
+                               userData.put("userType","lawyer");
                                 mViewPager.setCurrentItem(1);
                             }
                         });
                         mMovakelBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                isVakil="client";
+                                userData.put("userType","client");
+
                                 mViewPager.setCurrentItem(1);
                             }
                         });
@@ -218,8 +226,7 @@ public class Register extends AppCompatActivity {
                                     userData.put("U_Name_Show",mName.getText().toString());
                                     userData.put("U_Family_Show",mFamily.getText().toString());
                                     userData.put("U_Telephone_Show",mNumber.getText().toString());
-
-                                    UserNumber = mNumber.getText().toString();
+                                    userData.put("smsCode",generateRqCode(7615,9323));
                                     SendSms();
                                 }else {
                                     Toasty.warning(getContext(), "لطفا ورودی های خود را چک کنید.", Toast.LENGTH_SHORT, true).show();
@@ -244,16 +251,16 @@ public class Register extends AppCompatActivity {
                                 Log.e("Code-->",smsCode);
                                 Log.e("VERIFYC-->",mVerifyCode.getCode().toString());
 
-                                if(smsCode.equals(mVerifyCode.getCode().toString()))
+                                if(smsCode.equals(mVerifyCode.getCode().trim()))
                                 {
                                     Log.e("Code Verifyed"," Yes");
+
                                     SendFirstUserData();
-
-
                                 }else {
                                     Toasty.error(getContext(), "کد وارد شده اشتباه است !", Toast.LENGTH_SHORT, true).show();
 
                                 }
+
                             }
                         });
 
@@ -333,8 +340,7 @@ public class Register extends AppCompatActivity {
         private boolean CheckGalleryPremession()
         {
             final boolean[] res = {false};
-
-            Toasty.info(getContext(),"برای تصویر پروانه دسترسی به فایل را مجاز کنید.",Toast.LENGTH_SHORT,true).show();
+                final Register reg = new Register();
             Dexter.withActivity(getActivity())
                     .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                     .withListener(new PermissionListener() {
@@ -349,8 +355,11 @@ public class Register extends AppCompatActivity {
                         @Override public void onPermissionDenied(PermissionDeniedResponse response) {
                             CheckGalleryPremession();
                             /* ... */}
+                        @TargetApi(Build.VERSION_CODES.M)
                         @Override public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                            Toasty.info(getContext(),"برای تصویر پروانه دسترسی به فایل را مجاز کنید.",Toast.LENGTH_SHORT,true).show();
 
+                            reg.shouldShowRequestPermissionRationale(permission.getName());
                             /* ... */}
                     }).check();
             return res[0];
@@ -365,6 +374,7 @@ public class Register extends AppCompatActivity {
                 public void onResponse(String response) {
                     if(response.equals("Technocell:UserUpdated"))
                     {
+                        Log.e("hauououou",response.toString());
                         dialog.dismiss();
                         new MaterialDialog.Builder(getContext()).typeface("vazir.ttf","vazir.ttf")
                                 .title("ثبت موفق").content("همکار گرامی ، اطلاعات شما با موفقیت ثبت شد")
@@ -389,6 +399,9 @@ public class Register extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String,String> map = new HashMap<String,String>();
+                        Log.e("ImageCode->",ParvaneImageEncoded);
+                    Log.e("ImageCode->",ParvaneImageEncoded);
+
                     map.put("U_RqCode",generateRqCode(86639842,95632547));
                     map.put("U_RqType","updateVakilData");
                     map.put("U_ProfilePic",ParvaneImageEncoded);
@@ -439,8 +452,7 @@ public class Register extends AppCompatActivity {
             mVokala=rootView.findViewById(R.id.mVokala);
             mMoshaveran=rootView.findViewById(R.id.mMoshaveran);
             mAddress=rootView.findViewById(R.id.mAddress);
-            userPrefrence=PreferenceManager.getDefaultSharedPreferences(getContext());
-            userDataEdit=userPrefrence.edit();
+
 
 
         }
@@ -451,7 +463,6 @@ public class Register extends AppCompatActivity {
             mFamily=rootView.findViewById(R.id.mFamily);
             mNumber=rootView.findViewById(R.id.mNumber);
             mRegisterBtn=rootView.findViewById(R.id.mRegisterBtn);
-            userData.put("smsCode",generateRqCode(7615,9323));
 
 
 
@@ -492,29 +503,28 @@ public class Register extends AppCompatActivity {
 
         private void SendFirstUserData()
         {
+            int t=0;
+            Log.e("Tager->",String.valueOf(t+1));
             dialog = new MaterialDialog.Builder(getContext()).title("لطفا صبر کنید").content("درحال اعتبارسنجی اطلاعات شما").progress(true, 0).titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf","vazir.ttf").show();
 
             StringRequest firstDataRequest=new StringRequest(Request.Method.POST, USER_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    if(response.equals("Technocell:Ok"))
+                    Log.e("Response of add first",response.toString());
+                    if(response.trim().equals("Technocell:Ok"))
                     {
                         dialog.dismiss();
-                        new MaterialDialog.Builder(getContext()).typeface("vazir.ttf","vazir.ttf")
-                                .title("ثبت موفق").content("کاربر گرامی ، اطلاعات شما با موفقیت ثبت شد")
-                                .titleGravity(GravityEnum.END).contentGravity(GravityEnum.END)
-                                .positiveText("متوجه شدم")
-                                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                if(isVakil.equals("lawyer"))
-                                {
-                                    mViewPager.setCurrentItem(4);
-                                }else {
-                                    //go to hq
-                                }
-                            }
-                        }).show();
+                        Log.e("yayayay","ojokokjokj");
+                        isVakil=userData.get("userType");
+                        if(isVakil.equals("lawyer"))
+                        {
+                            Log.e("dadadad","fafafaf");
+                            mViewPager.setCurrentItem(4);
+                        }else {
+                            Log.e("lkjhlkj","12313");
+
+                            //go to hq
+                        }
 
                     }
                 }
@@ -528,12 +538,13 @@ public class Register extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String,String> map = new HashMap<String,String>();
+                    Log.e("DataFirstSend-->",userData.get("U_Name_Show")+userData.get("U_Family_Show")+userData.get("U_Telephone_Show")+userData.get("userType"));
                     map.put("U_RqCode",generateRqCode(2769,9563));
                     map.put("U_RqType","AddUser");
-                        map.put("U_Type",isVakil);
-                        map.put("U_Telephone",Objects.requireNonNull(userData.get("U_Telephone_Show")));
-                        map.put("U_Family",Objects.requireNonNull(userData.get("U_Family_Show")));
-                        map.put("U_Name",Objects.requireNonNull(userData.get("U_Name_Show")));
+                        map.put("U_Type",userData.get("userType"));
+                        map.put("U_Telephone",userData.get("U_Telephone_Show"));
+                        map.put("U_Family",userData.get("U_Family_Show"));
+                        map.put("U_Name",userData.get("U_Name_Show"));
                         map.put("U_ID",GenerateUserId());
                         return map;
                 }
@@ -544,8 +555,10 @@ public class Register extends AppCompatActivity {
         private String GenerateUserId()
         {
 
-            String id= "TVJ-".concat(generateRqCode(2769,9563)).concat(userData.get("number"));
+            String id= "TVJ-".concat(generateRqCode(2769,9563)).concat(userData.get("U_Telephone_Show"));
             userDataEdit.putString("User_ID",id);
+            userDataEdit.commit();
+            Log.e("User id that>",id);
             return id;
 
         }
@@ -564,10 +577,10 @@ public class Register extends AppCompatActivity {
         private void SendSms()
         {
             dialog = new MaterialDialog.Builder(getContext()).title("لطفا صبر کنید").content("درحال اعتبارسنجی اطلاعات شما").progress(true, 0).titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf","vazir.ttf").show();
-            RQ=Volley.newRequestQueue(getContext());
             StringRequest smsRequest=new StringRequest(Request.Method.POST, SMS_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+                    Log.e("Sms Response-->",response.toString());
                     dialog.dismiss();
                     mViewPager.setCurrentItem(2);
                 }
@@ -580,8 +593,9 @@ public class Register extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String,String> map = new HashMap<String,String>();
-                    map.put("userNumberTechnocell",String.valueOf(UserNumber));
+                    map.put("userNumberTechnocell",userData.get("U_Telephone_Show"));
                     map.put("userKey",userData.get("smsCode"));
+
                     return map;
             }
         };
@@ -612,7 +626,7 @@ public class Register extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
     }
 }
