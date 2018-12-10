@@ -7,14 +7,9 @@
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-<<<<<<< HEAD
     tools:context=".Activity.HqActivity"
-    tools:showIn="@layout/app_bar_hq">
-=======
-    tools:context=".HqActivity"
     tools:showIn="@layout/app_bar_hq"
     android:orientation="vertical">
->>>>>>> 100e1a2057c5d595999fc3dca6eb62f84a0eb171
 
     <ss.com.bannerslider.Slider
         android:id="@+id/mSlider"

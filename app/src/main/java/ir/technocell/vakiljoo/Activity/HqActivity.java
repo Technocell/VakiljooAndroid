@@ -63,6 +63,7 @@ import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilAdapter;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilsRecyclerListener;
 import ir.technocell.vakiljoo.RecyclerItems.TopSoalsItem;
 import ir.technocell.vakiljoo.RecyclerItems.TopVakilsItem;
+import ir.technocell.vakiljoo.VisualUtility;
 import mehdi.sakout.fancybuttons.FancyButton;
 import ss.com.bannerslider.ImageLoadingService;
 import ss.com.bannerslider.Slider;

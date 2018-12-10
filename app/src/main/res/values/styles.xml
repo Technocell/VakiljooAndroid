@@ -32,7 +32,7 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
-<<<<<<< HEAD
+
     <style name="CheckBoxTheme" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">#FFFFFF</item>
     </style>
@@ -47,10 +47,10 @@
         <item name="android:dropDownSelector">@android:color/white</item>
     </style>
 
-=======
+
     <style name="DrawerArrowStyle" parent="@style/AppTheme">
         <item name="spinBars">true</item>
         <item name="color">@color/colorPrimary</item>
     </style>
->>>>>>> 100e1a2057c5d595999fc3dca6eb62f84a0eb171
+
 </resources>

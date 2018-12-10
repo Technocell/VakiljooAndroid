@@ -36,6 +36,7 @@ import java.util.Objects;
 import java.util.Random;
 
 import es.dmoral.toasty.Toasty;
+import ir.technocell.vakiljoo.Activity.HqActivity;
 
 
 public class SplashScreen extends AppCompatActivity {
