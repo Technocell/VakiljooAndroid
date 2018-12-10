@@ -1,4 +1,4 @@
-package ir.technocell.vakiljoo;
+package ir.technocell.vakiljoo.Activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ir.technocell.vakiljoo.R;
 
 public class HqActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

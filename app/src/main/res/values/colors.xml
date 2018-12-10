@@ -11,4 +11,8 @@
     <color name="orange">#FF4400</color>
     <color name="green_blue_color">#069C8A</color>
     <color name="background_color">#EBE8E8</color>
+    <color name="trs">#26000000</color>
+    <color name="color_card_view">#D7DBDD</color>
+    <color name="black">#000</color>
+    <color name="CHECK_COLOR">#129BDF</color>
 </resources>

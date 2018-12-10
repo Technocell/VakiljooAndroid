@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/contact_office_hours_txt"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="ساعات حضور شما در دفتر کارتان"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        tools:ignore="MissingPrefix" />
+
+
+    <android.support.v7.widget.CardView
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/card_view_orange"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        card_view:cardCornerRadius="15dp"
+        card_view:cardElevation="10dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/morning"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:gravity="center_vertical"
+                android:text="صبح"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                card_view:layout_constraintRight_toRightOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:id="@+id/afternoon"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:gravity="center_vertical"
+                android:text="بعد از ظهر"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintTop_toTopOf="@id/morning"
+                tools:ignore="MissingPrefix" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:background="@color/white"
+                android:paddingBottom="8dp"
+                card_view:layout_constraintLeft_toLeftOf="@id/morning"
+                card_view:layout_constraintRight_toRightOf="@id/morning"
+                card_view:layout_constraintTop_toBottomOf="@id/morning">
+
+                <TextView
+                    android:id="@+id/az_y"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="8dp"
+                    android:text="از"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    card_view:layout_constraintRight_toRightOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingPrefix" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view_y"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/color_card_view"
+                    card_view:cardCornerRadius="5dp"
+
+                    card_view:cardElevation="5dp"
+                    card_view:layout_constraintRight_toLeftOf="@id/az_y"
+                    card_view:layout_constraintTop_toTopOf="@id/az_y">
+
+                    <TextView
+                        android:id="@+id/t1_y"
+                        fontPath="fonts/vazir.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text=" 00 : 00 "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingPrefix" />
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/ta_y"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="8dp"
+                    android:text="تا"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    card_view:layout_constraintRight_toLeftOf="@id/card_view_y"
+                    card_view:layout_constraintTop_toTopOf="@id/az_y"
+                    tools:ignore="MissingPrefix" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/color_card_view"
+                    card_view:cardCornerRadius="5dp"
+
+                    card_view:cardElevation="5dp"
+                    card_view:layout_constraintRight_toLeftOf="@id/ta_y"
+                    card_view:layout_constraintTop_toTopOf="@id/az_y">
+
+                    <TextView
+                        android:id="@+id/t2_y"
+                        fontPath="fonts/vazir.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text=" 00 : 00 "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingPrefix" />
+                </android.support.v7.widget.CardView>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:background="@color/white"
+                android:paddingBottom="8dp"
+                card_view:layout_constraintLeft_toLeftOf="@id/afternoon"
+                card_view:layout_constraintRight_toRightOf="@id/afternoon"
+                card_view:layout_constraintTop_toBottomOf="@id/afternoon">
+
+                <TextView
+                    android:id="@+id/az1_y"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="از"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    card_view:layout_constraintRight_toRightOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingPrefix" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view1_y"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/color_card_view"
+                    card_view:cardCornerRadius="5dp"
+
+                    card_view:cardElevation="5dp"
+                    card_view:layout_constraintRight_toLeftOf="@id/az1_y"
+                    card_view:layout_constraintTop_toTopOf="@id/az1_y">
+
+                    <TextView
+                        android:id="@+id/t11_y"
+                        fontPath="fonts/vazir.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text=" 00 : 00 "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingPrefix" />
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/ta1_y"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="8dp"
+                    android:text="تا"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    card_view:layout_constraintRight_toLeftOf="@id/card_view1_y"
+                    card_view:layout_constraintTop_toTopOf="@id/az1_y"
+                    tools:ignore="MissingPrefix" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/color_card_view"
+                    card_view:cardCornerRadius="5dp"
+
+                    card_view:cardElevation="5dp"
+                    card_view:layout_constraintRight_toLeftOf="@id/ta1_y"
+                    card_view:layout_constraintTop_toTopOf="@id/az1_y">
+
+                    <TextView
+                        android:id="@+id/t21_y"
+                        fontPath="fonts/vazir.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text=" 00 : 00 "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingPrefix" />
+                </android.support.v7.widget.CardView>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/day_txt"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="روزهایی که می توانید به تماس تلفنی کاربران جهت مشاوره پاسخ دهید"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        tools:ignore="MissingPrefix" />
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/card_view_orange"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
+
+        <CheckBox
+            android:id="@+id/check0"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="5dp"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:textColor="@color/white"
+            android:theme="@style/CheckBoxTheme"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/txt0"
+            fontPath="fonts/vazir.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="شنبه"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            app:layout_constraintRight_toLeftOf="@id/check0"
+            tools:ignore="MissingPrefix" />
+
+        <CheckBox
+            android:id="@+id/check1"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="5dp"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:textColor="@color/white"
+            android:theme="@style/CheckBoxTheme"
+            app:layout_constraintRight_toLeftOf="@id/txt0" />
+
+        <TextView
+            android:id="@+id/txt1"
+            fontPath="fonts/vazir.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="یکشنبه"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            app:layout_constraintRight_toLeftOf="@id/check1"
+            tools:ignore="MissingPrefix" />
+
+
+        <CheckBox
+            android:id="@+id/check2"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="5dp"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:textColor="@color/white"
+            android:theme="@style/CheckBoxTheme"
+            app:layout_constraintRight_toLeftOf="@id/txt1" />
+
+        <TextView
+            android:id="@+id/txt2"
+            fontPath="fonts/vazir.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="دوشنبه"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            app:layout_constraintRight_toLeftOf="@id/check2"
+            tools:ignore="MissingPrefix" />
+
+        <CheckBox
+            android:id="@+id/check3"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="5dp"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:textColor="@color/white"
+            android:theme="@style/CheckBoxTheme"
+            app:layout_constraintRight_toLeftOf="@id/txt2" />
+
+        <TextView
+            android:id="@+id/txt3"
+            fontPath="fonts/vazir.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="سه شنبه"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            app:layout_constraintRight_toLeftOf="@id/check3"
+            tools:ignore="MissingPrefix" />
+
+        <CheckBox
+            android:id="@+id/check4"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="5dp"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:textColor="@color/white"
+            android:theme="@style/CheckBoxTheme"
+            app:layout_constraintRight_toLeftOf="@id/txt3" />
+
+        <TextView
+            android:id="@+id/txt4"
+            fontPath="fonts/vazir.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="چهارشنبه"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            app:layout_constraintRight_toLeftOf="@id/check4"
+            tools:ignore="MissingPrefix" />
+
+        <CheckBox
+            android:id="@+id/check5"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="5dp"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:textColor="@color/white"
+            android:theme="@style/CheckBoxTheme"
+            app:layout_constraintRight_toLeftOf="@id/txt4" />
+
+        <TextView
+            android:id="@+id/txt5"
+            fontPath="fonts/vazir.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="پنجشنبه"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            app:layout_constraintRight_toLeftOf="@id/check5"
+            tools:ignore="MissingPrefix" />
+
+        <CheckBox
+            android:id="@+id/check6"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="5dp"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:textColor="@color/white"
+            android:theme="@style/CheckBoxTheme"
+            app:layout_constraintRight_toLeftOf="@id/txt5" />
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/txt6"
+            fontPath="fonts/vazir.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="جمعه"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            app:layout_constraintRight_toLeftOf="@id/check6"
+            tools:ignore="MissingPrefix" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/hours_of_office_attendance_txt"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="ساعت مناسب جهت تماس تلفنی کاربران"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        tools:ignore="MissingPrefix" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="8dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="5dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/morning_a"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:gravity="center_vertical"
+                android:text="صبح"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                card_view:layout_constraintRight_toRightOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:id="@+id/afternoon_a"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:gravity="center_vertical"
+                android:text="بعد از ظهر"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintTop_toTopOf="@id/morning_a"
+                tools:ignore="MissingPrefix" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:background="@color/colorPrimary"
+                android:paddingBottom="8dp"
+                card_view:layout_constraintLeft_toLeftOf="@id/morning_a"
+                card_view:layout_constraintRight_toRightOf="@id/morning_a"
+                card_view:layout_constraintTop_toBottomOf="@id/morning_a">
+
+                <TextView
+                    android:id="@+id/az"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="8dp"
+                    android:text="از"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    card_view:layout_constraintRight_toRightOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingPrefix" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:alpha="0.5"
+                    android:background="@color/trs"
+                    card_view:cardCornerRadius="5dp"
+
+                    card_view:cardElevation="5dp"
+                    card_view:layout_constraintRight_toLeftOf="@id/az"
+                    card_view:layout_constraintTop_toTopOf="@id/az">
+
+                    <TextView
+                        android:id="@+id/t1"
+                        fontPath="fonts/vazir.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text=" 00 : 00 "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingPrefix" />
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/ta"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="8dp"
+                    android:text="تا"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    card_view:layout_constraintRight_toLeftOf="@id/card_view"
+                    card_view:layout_constraintTop_toTopOf="@id/az"
+                    tools:ignore="MissingPrefix" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:alpha="0.5"
+                    android:background="@color/trs"
+                    card_view:cardCornerRadius="5dp"
+
+                    card_view:cardElevation="5dp"
+                    card_view:layout_constraintRight_toLeftOf="@id/ta"
+                    card_view:layout_constraintTop_toTopOf="@id/az">
+
+                    <TextView
+                        android:id="@+id/t2"
+                        fontPath="fonts/vazir.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text=" 00 : 00 "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingPrefix" />
+                </android.support.v7.widget.CardView>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:background="@color/colorPrimary"
+                android:paddingBottom="8dp"
+                card_view:layout_constraintLeft_toLeftOf="@id/afternoon_a"
+                card_view:layout_constraintRight_toRightOf="@id/afternoon_a"
+                card_view:layout_constraintTop_toBottomOf="@id/afternoon_a">
+
+                <TextView
+                    android:id="@+id/az1"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="از"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    card_view:layout_constraintRight_toRightOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingPrefix" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:alpha="0.5"
+                    android:background="@color/trs"
+                    card_view:cardCornerRadius="5dp"
+
+                    card_view:cardElevation="5dp"
+                    card_view:layout_constraintRight_toLeftOf="@id/az1"
+                    card_view:layout_constraintTop_toTopOf="@id/az1">
+
+                    <TextView
+                        android:id="@+id/t11"
+                        fontPath="fonts/vazir.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text=" 00 : 00 "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingPrefix" />
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/ta1"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="8dp"
+                    android:text="تا"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    card_view:layout_constraintRight_toLeftOf="@id/card_view1"
+                    card_view:layout_constraintTop_toTopOf="@id/az1"
+                    tools:ignore="MissingPrefix" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:alpha="0.5"
+                    android:background="@color/trs"
+                    card_view:cardCornerRadius="5dp"
+
+                    card_view:cardElevation="5dp"
+                    card_view:layout_constraintRight_toLeftOf="@id/ta1"
+                    card_view:layout_constraintTop_toTopOf="@id/az1">
+
+                    <TextView
+                        android:id="@+id/t21"
+                        fontPath="fonts/vazir.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text=" 00 : 00 "
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="MissingPrefix" />
+                </android.support.v7.widget.CardView>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <mehdi.sakout.fancybuttons.FancyButton
+
+        android:id="@+id/mRegisterBtn"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="16dp"
+
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_radius="10dp"
+        fancy:fb_text="ثبت و ارسال"
+        fancy:fb_textSize="25sp" />
+
+
+</LinearLayout>

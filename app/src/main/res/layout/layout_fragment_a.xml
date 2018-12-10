@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="5dp">
+
+            <EditText
+                android:paddingBottom="120dp"
+                android:id="@+id/mTahselat"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="درباره ی خودتان بنویسید ..."
+                android:inputType="text"
+                android:lines="8"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                tools:ignore="MissingPrefix" />
+        </android.support.v7.widget.CardView>
+
+        <Button
+            android:id="@+id/mMovakelBtn"
+            fontPath="fonts/vazir.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_back"
+            android:text="ثبت تغییرات"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            tools:ignore="MissingPrefix" />
+</LinearLayout>

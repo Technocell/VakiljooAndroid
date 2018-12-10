@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background_color"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/cc"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/card_view_t"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/bb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+            android:text="کیفری"
+            android:textSize="15sp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/spinner"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
+
+    </RelativeLayout>
+
+    <TextView
+
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/card_view_tt"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cc" />
+
+    <TextView
+        android:id="@+id/a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:text="عنوان سوال"
+        android:textColor="@color/green_blue_color"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="@id/container"
+        app:layout_constraintTop_toTopOf="@id/container" />
+
+    <TextView
+        android:id="@+id/b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="20dp"
+        android:text="عنوان سوال خود را وارد کنید"
+        android:textSize="10sp"
+        app:layout_constraintRight_toRightOf="@id/container"
+        app:layout_constraintTop_toBottomOf="@id/a" />
+
+
+    <TextView
+
+        android:id="@+id/q"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/card_view_tt"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@id/vq"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container" />
+
+    <TextView
+        android:id="@+id/aq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:text=" سوال"
+        android:textColor="@color/green_blue_color"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="@id/q"
+        app:layout_constraintTop_toTopOf="@id/q" />
+
+    <TextView
+        android:id="@+id/cq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:paddingBottom="22dp"
+        android:text="متن سوال خود را تا حد امکان کامل بنویسید"
+        android:textSize="10sp"
+        app:layout_constraintRight_toRightOf="@id/q"
+        app:layout_constraintTop_toBottomOf="@id/aq" />
+
+    <TextView
+        android:id="@+id/vq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="120dp"
+        android:paddingBottom="2dp"
+        android:text="0/500"
+        android:textColor="@color/green_blue_color"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/q"
+        app:layout_constraintTop_toBottomOf="@id/aq"
+        app:layout_goneMarginBottom="8dp" />
+
+
+    <TextView
+
+        android:id="@+id/x"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/card_view_tt"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/simpleswitch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vq" />
+
+    <TextView
+        android:id="@+id/xx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+
+        android:text="سوالم به عنوان سوال متداول برای همه نمایش داده شود"
+        android:textColor="@color/green_blue_color"
+        android:textSize="10sp"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+
+        app:layout_constraintRight_toRightOf="@id/x"
+        app:layout_constraintTop_toTopOf="@id/x" />
+
+    <Switch
+        android:id="@+id/simpleswitch"
+        android:layout_width="54dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="6dp"
+
+        android:paddingTop="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:checked="true"
+        android:switchMinWidth="56dp"
+        android:textOff="OFF"
+        android:textOn="ON"
+        android:paddingBottom="4dp"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/x"
+        app:layout_constraintTop_toTopOf="@id/x" />
+
+
+    <TextView
+
+        android:id="@+id/y"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/card_view_tt"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/yyyyy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/simpleswitch" />
+
+    <TextView
+        android:id="@+id/yy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:text="راهنما"
+        android:textColor="@color/green_blue_color"
+        android:textSize="16sp"
+        app:layout_constraintRight_toRightOf="@id/y"
+        app:layout_constraintTop_toTopOf="@id/y" />
+
+    <TextView
+        android:id="@+id/yyy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:text="سوال خود را به صورت کامل و با ذکر جزییات شرح دهید تا مشاوران"
+        android:textColor="@color/green_blue_color"
+        android:textSize="10sp"
+        app:layout_constraintRight_toRightOf="@id/y"
+        app:layout_constraintTop_toBottomOf="@id/yy" />
+
+    <TextView
+        android:id="@+id/yyyy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:text="بتوانند پاسخ دقیق به شما ارائه دهند."
+        android:textColor="@color/green_blue_color"
+        android:textSize="10sp"
+        app:layout_constraintRight_toRightOf="@id/y"
+        app:layout_constraintTop_toBottomOf="@id/yyy" />
+
+    <TextView
+        android:id="@+id/yyyyy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="توجه داشته باشد پس از ارسال امکان ویرایش وجود ندارد."
+        android:textColor="@color/green_blue_color"
+        android:textSize="10sp"
+        app:layout_constraintRight_toRightOf="@id/y"
+        app:layout_constraintTop_toBottomOf="@id/yyyy" />
+
+    <Button
+        android:id="@+id/mMovakelBtn"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/btn_back"
+        android:text="ثبت و ارسال"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/yyyyy"
+        tools:ignore="MissingPrefix" />
+</android.support.constraint.ConstraintLayout>
