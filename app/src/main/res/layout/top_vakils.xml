@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="@color/trans"
+        android:background="@drawable/top_vakil_back"
+        android:layout_width="match_parent"
+        android:layout_height="90dp" >
+<RelativeLayout
+
+    android:layout_margin="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/top_vakil_back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_centerVertical="true"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/mTVakilImage"
+        android:layout_alignParentRight="true"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="16dp"
+        android:src="@drawable/vakile_profile"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="2dp" />
+
+    <TextView
+        android:id="@+id/mTVakilName"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginRight="76dp"
+        android:text="نام و نام خانوادگی"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        tools:ignore="MissingPrefix" />
+
+
+
+    <TextView
+        android:id="@+id/mTVakilTahselat"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginRight="76dp"
+        android:text="تحصیلات"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        tools:ignore="MissingPrefix" />
+
+    <TextView
+        android:id="@+id/mTVakilTakhasos"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="194dp"
+        android:layout_marginRight="194dp"
+        android:text="تخصص"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        tools:ignore="MissingPrefix" />
+
+    <TextView
+        android:id="@+id/mTVakilRotbeh"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="315dp"
+        android:layout_marginRight="315dp"
+        android:text="رتبه"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        tools:ignore="MissingPrefix" />
+
+
+
+</RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

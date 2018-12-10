@@ -24,4 +24,9 @@
     <string name="notDaryaftTxt">آیا رمز را دریافت نکرده اید؟</string>
     <string name="name">نام</string>
     <string name="family_name">نام خانوادگی</string>
+
+    <string name="TopSoalsTitle">سوالات برتر</string>
+    <string name="TopVakilsTitle">وکلای برتر</string>
+
+    <string name="shareText">سلام ، من از اپ وکیل جو استفاده می کنم و خیلی راضی هستم ، توهم از لینک زیر دانلود کن :</string>
 </resources>

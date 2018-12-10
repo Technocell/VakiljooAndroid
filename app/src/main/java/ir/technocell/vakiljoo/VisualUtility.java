@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import java.io.ByteArrayOutputStream;
+import java.net.InetAddress;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
@@ -27,6 +28,17 @@ public class VisualUtility {
     public void SetFullScreen()
     {
 
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void InitCalliGraphy()

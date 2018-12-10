@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        android:weightSum="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:layout_width="@dimen/bottomMenuSize"
+            android:layout_height="@dimen/bottomMenuSize"
+            android:src="@drawable/mehasebat_icon"/>
+        <ImageView
+            android:layout_margin="5dp"
+
+            android:layout_weight="1"
+            android:layout_width="@dimen/bottomMenuSize"
+            android:layout_height="@dimen/bottomMenuSize"
+            android:src="@drawable/map_icon"/>
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+
+            android:layout_width="@dimen/bottomMenuSize"
+            android:layout_height="@dimen/bottomMenuSize"
+            android:src="@drawable/chat_icon"/>
+        <ImageView
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:layout_width="@dimen/bottomMenuSize"
+            android:layout_height="@dimen/bottomMenuSize"
+            android:src="@drawable/tart_soal_icon"/>
+
+
+        <ImageView
+            android:layout_margin="5dp"
+
+            android:layout_weight="1"
+            android:layout_width="@dimen/bottomMenuSize"
+            android:layout_height="@dimen/bottomMenuSize"
+            android:src="@drawable/home_icon"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>
