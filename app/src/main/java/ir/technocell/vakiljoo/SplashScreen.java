@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -33,6 +34,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+
+import es.dmoral.toasty.Toasty;
 
 
 public class SplashScreen extends AppCompatActivity {
@@ -56,10 +59,13 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash_screen);
-        intit();
-        CheckUserExist();
-
-
+        if(new VisualUtility(this).isInternetAvailable())
+        {
+            intit();
+            CheckUserExist();
+        }else {
+            Toasty.error(this,"اتصال به اینترنت برقرار نیست !",Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean CheckUserExist()
@@ -98,7 +104,6 @@ public class SplashScreen extends AppCompatActivity {
                         mapUser.put("U_Money",object.getString("U_Money"));
                         mapUser.put("U_Type",object.getString("U_Type"));
                         mapUser.put("U_ProfilePic",object.getString("U_ProfilePic"));
-
                     }
                     SetOnlineTime();
 
@@ -131,10 +136,18 @@ public class SplashScreen extends AppCompatActivity {
         if(userType.equals("lawyer"))
         {
             userDataEdit.putInt("userType",1);
+           // Intent intent = new Intent(this, HqActivity.class); change HqActivity tovakil activity
+            //intent.putExtra("mapUser", mapUser);
+            //startActivity(intent);
         }else if(userType.equals("client")) {
             userDataEdit.putInt("userType",0);
+            Intent intent = new Intent(this, HqActivity.class);
+            intent.putExtra("mapUser", mapUser);
+            startActivity(intent);
         }
     }
+
+
 
     private String GetUserID()
     {

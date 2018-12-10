@@ -2,6 +2,9 @@
 <project version="4">
   <component name="Kotlin2JsCompilerArguments">
     <option name="sourceMapEmbedSources" />
+<<<<<<< HEAD
     <option name="sourceMapPrefix" />
+=======
+>>>>>>> 100e1a2057c5d595999fc3dca6eb62f84a0eb171
   </component>
 </project>

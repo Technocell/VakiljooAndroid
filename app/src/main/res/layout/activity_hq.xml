@@ -17,16 +17,19 @@
         android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView
+
         android:background="@color/colorPrimary"
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_gravity="end"
         android:fitsSystemWindows="true"
+        app:itemIconTint="#000000"
+
         app:headerLayout="@layout/nav_header_hq">
 
         <LinearLayout
-            android:weightSum="7"
+            android:weightSum="8"
             android:layout_marginTop="100dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"
@@ -75,7 +78,7 @@
 
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/website"
+                android:src="@drawable/sent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <ImageView
@@ -84,7 +87,7 @@
 
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/sent"
+                android:src="@drawable/setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <ImageView

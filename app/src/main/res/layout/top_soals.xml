@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="@color/trans"
+        android:background="@drawable/top_vakil_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <RelativeLayout
+
+            android:layout_marginTop="25dp"
+            android:background="@drawable/questions_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:maxLength="30"
+                android:id="@+id/mSKolase"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="76dp"
+                android:layout_marginRight="76dp"
+                android:text="نام و نام خانوادگی"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                tools:ignore="MissingPrefix" />
+
+
+
+            <TextView
+                android:maxLength="9"
+                android:id="@+id/mSNameFamily"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="76dp"
+                android:layout_marginRight="76dp"
+                android:text="تحصیلات"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:maxLength="10"
+                android:id="@+id/mSDate"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="194dp"
+                android:layout_marginRight="194dp"
+                android:text="تخصص"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:maxLength="2"
+                android:id="@+id/mSId"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="315dp"
+                android:layout_marginRight="315dp"
+                android:text="رتبه"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                tools:ignore="MissingPrefix" />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
