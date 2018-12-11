@@ -18,8 +18,13 @@
         <activity
             android:name=".Activity.HqActivity"
             android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            android:theme="@style/AppTheme" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -29,25 +34,12 @@
             android:name=".Register"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.VakilInformationActivity">
-            android:theme="@style/AppTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
         <activity
-            android:name=".SplashScreen"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_splash_screen"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.LegalIssuePlanlActivity">
-
-        </activity>
+            android:name=".Activity.VakilInformationActivity"
+            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".Activity.MainActivity"></activity>
+        <activity android:name=".Activity.LegalIssuePlanlActivity"></activity>
+        <activity android:name=".UserQuestionsActivity"></activity>
     </application>
 
 </manifest>

@@ -3,7 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:orientation="vertical">
@@ -22,23 +22,25 @@
 
 
     <android.support.v7.widget.CardView
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/card_view_orange"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/card_view_orange"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         card_view:cardCornerRadius="15dp"
-        card_view:cardElevation="10dp">
+        card_view:cardElevation="10dp"
+        card_view:contentPaddingBottom="8dp"
+        card_view:contentPaddingTop="8dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+
             android:background="@color/white">
 
             <TextView
@@ -84,8 +86,8 @@
                     fontPath="fonts/vazir.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="12dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="12dp"
                     android:text="از"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp"
@@ -173,8 +175,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="از"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp"
@@ -263,23 +265,22 @@
         android:textSize="12sp"
         tools:ignore="MissingPrefix" />
 
-    <android.support.constraint.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/card_view_orange"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
 
         <CheckBox
             android:id="@+id/check0"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
             android:buttonTint="@color/white"
             android:checked="true"
             android:textColor="@color/white"
@@ -294,7 +295,7 @@
             android:paddingTop="4dp"
             android:text="شنبه"
             android:textColor="@color/white"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@id/check0"
             tools:ignore="MissingPrefix" />
 
@@ -302,8 +303,8 @@
             android:id="@+id/check1"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:layout_marginRight="6dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="6dp"
             android:buttonTint="@color/white"
             android:checked="true"
             android:textColor="@color/white"
@@ -318,7 +319,7 @@
             android:paddingTop="4dp"
             android:text="یکشنبه"
             android:textColor="@color/white"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@id/check1"
             tools:ignore="MissingPrefix" />
 
@@ -327,8 +328,8 @@
             android:id="@+id/check2"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:layout_marginRight="6dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="6dp"
             android:buttonTint="@color/white"
             android:checked="true"
             android:textColor="@color/white"
@@ -343,7 +344,7 @@
             android:paddingTop="4dp"
             android:text="دوشنبه"
             android:textColor="@color/white"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@id/check2"
             tools:ignore="MissingPrefix" />
 
@@ -351,8 +352,8 @@
             android:id="@+id/check3"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:layout_marginRight="6dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="6dp"
             android:buttonTint="@color/white"
             android:checked="true"
             android:textColor="@color/white"
@@ -367,7 +368,7 @@
             android:paddingTop="4dp"
             android:text="سه شنبه"
             android:textColor="@color/white"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@id/check3"
             tools:ignore="MissingPrefix" />
 
@@ -375,8 +376,8 @@
             android:id="@+id/check4"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:layout_marginRight="6dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="6dp"
             android:buttonTint="@color/white"
             android:checked="true"
             android:textColor="@color/white"
@@ -391,7 +392,7 @@
             android:paddingTop="4dp"
             android:text="چهارشنبه"
             android:textColor="@color/white"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@id/check4"
             tools:ignore="MissingPrefix" />
 
@@ -399,8 +400,8 @@
             android:id="@+id/check5"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:layout_marginRight="6dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="6dp"
             android:buttonTint="@color/white"
             android:checked="true"
             android:textColor="@color/white"
@@ -415,7 +416,7 @@
             android:paddingTop="4dp"
             android:text="پنجشنبه"
             android:textColor="@color/white"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@id/check5"
             tools:ignore="MissingPrefix" />
 
@@ -423,8 +424,8 @@
             android:id="@+id/check6"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:layout_marginRight="6dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="6dp"
             android:buttonTint="@color/white"
             android:checked="true"
             android:textColor="@color/white"
@@ -432,15 +433,15 @@
             app:layout_constraintRight_toLeftOf="@id/txt5" />
 
         <TextView
-            android:layout_marginLeft="8dp"
             android:id="@+id/txt6"
             fontPath="fonts/vazir.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:paddingTop="4dp"
             android:text="جمعه"
             android:textColor="@color/white"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@id/check6"
             tools:ignore="MissingPrefix" />
 
@@ -463,14 +464,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="12dp"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingRight="4dp"
             android:background="@color/colorPrimary">
 
             <TextView
@@ -517,8 +521,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="12dp"
                     android:text="از"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -608,8 +612,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="از"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -692,13 +696,13 @@
 
         android:id="@+id/mRegisterBtn"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="65dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="50dp"
 
         fancy:fb_defaultColor="@color/colorPrimary"
         fancy:fb_radius="10dp"
