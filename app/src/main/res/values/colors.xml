@@ -18,4 +18,5 @@
     <color name="CHECK_COLOR">#129BDF</color>
 
     <color name="trans">#00000000</color>
+    <color name="cadr_cardview">#efefef</color>
 </resources>

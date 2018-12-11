@@ -17,7 +17,7 @@
         android:text="ساعات حضور شما در دفتر کارتان"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="15sp"
+        android:textSize="14sp"
         tools:ignore="MissingPrefix" />
 
 
@@ -39,20 +39,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="8dp"
 
             android:background="@color/white">
+
 
             <TextView
                 android:id="@+id/morning"
                 fontPath="fonts/vazir.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="60dp"
+               android:paddingRight="80dp"
                 android:gravity="center_vertical"
                 android:text="صبح"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 card_view:layout_constraintRight_toRightOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingPrefix" />
@@ -66,32 +66,42 @@
                 android:gravity="center_vertical"
                 android:text="بعد از ظهر"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 card_view:layout_constraintLeft_toLeftOf="parent"
                 card_view:layout_constraintTop_toTopOf="@id/morning"
                 tools:ignore="MissingPrefix" />
 
+
             <android.support.constraint.ConstraintLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:background="@color/white"
-                android:paddingBottom="8dp"
+                android:paddingBottom="4dp"
                 card_view:layout_constraintLeft_toLeftOf="@id/morning"
                 card_view:layout_constraintRight_toRightOf="@id/morning"
                 card_view:layout_constraintTop_toBottomOf="@id/morning">
+                <ImageView
+                    android:id="@+id/calander"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginRight="4dp"
+                    card_view:layout_constraintRight_toRightOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/calendar"/>
 
                 <TextView
                     android:id="@+id/az_y"
                     fontPath="fonts/vazir.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginRight="8dp"
+                    android:paddingTop="4dp"
                     android:text="از"
+                    android:paddingRight="20dp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp"
-                    card_view:layout_constraintRight_toRightOf="parent"
+                   card_view:layout_constraintRight_toLeftOf="@id/calander"
                     card_view:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingPrefix" />
 
@@ -100,10 +110,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
-                    android:background="@color/color_card_view"
-                    card_view:cardCornerRadius="5dp"
+                    android:background="@color/background_color"
+                    android:backgroundTint="@color/cadr_cardview"
+                    card_view:cardCornerRadius="4dp"
 
-                    card_view:cardElevation="5dp"
+                    card_view:cardElevation="4dp"
                     card_view:layout_constraintRight_toLeftOf="@id/az_y"
                     card_view:layout_constraintTop_toTopOf="@id/az_y">
 
@@ -112,10 +123,12 @@
                         fontPath="fonts/vazir.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="4dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
                         android:text=" 00 : 00 "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         tools:ignore="MissingPrefix" />
                 </android.support.v7.widget.CardView>
 
@@ -128,7 +141,7 @@
                     android:layout_marginRight="8dp"
                     android:text="تا"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     card_view:layout_constraintRight_toLeftOf="@id/card_view_y"
                     card_view:layout_constraintTop_toTopOf="@id/az_y"
                     tools:ignore="MissingPrefix" />
@@ -152,7 +165,7 @@
                         android:layout_marginLeft="12dp"
                         android:text=" 00 : 00 "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         tools:ignore="MissingPrefix" />
                 </android.support.v7.widget.CardView>
 
@@ -179,7 +192,7 @@
                     android:layout_marginRight="8dp"
                     android:text="از"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     card_view:layout_constraintRight_toRightOf="parent"
                     card_view:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingPrefix" />
@@ -204,7 +217,7 @@
                         android:layout_marginLeft="12dp"
                         android:text=" 00 : 00 "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         tools:ignore="MissingPrefix" />
                 </android.support.v7.widget.CardView>
 
@@ -217,7 +230,7 @@
                     android:layout_marginRight="8dp"
                     android:text="تا"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     card_view:layout_constraintRight_toLeftOf="@id/card_view1_y"
                     card_view:layout_constraintTop_toTopOf="@id/az1_y"
                     tools:ignore="MissingPrefix" />
@@ -241,7 +254,7 @@
                         android:layout_marginLeft="12dp"
                         android:text=" 00 : 00 "
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         tools:ignore="MissingPrefix" />
                 </android.support.v7.widget.CardView>
 

@@ -27,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:text=" طرح سوال حقوقی"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintLeft_toRightOf="@id/img_btn"
         app:layout_constraintTop_toTopOf="parent" />
 

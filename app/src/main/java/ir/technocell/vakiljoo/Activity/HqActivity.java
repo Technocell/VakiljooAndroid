@@ -189,7 +189,7 @@ public class HqActivity extends AppCompatActivity
             mDFamily.setText(hashMap.get("U_Family_Show").toString());
             mDMoney.setText(hashMap.get("U_Money").toString());
 
-
+/*
             mChargeWallet = navigationView.findViewById(R.id.mChargeWallet);
             mSite = findViewById(R.id.mSite);
             mAboutUs = findViewById(R.id.mAboutUs);
@@ -248,6 +248,7 @@ public class HqActivity extends AppCompatActivity
                     Toasty.info(HqActivity.this, "به زودی ...", Toast.LENGTH_SHORT).show();
                 }
             });
+            */
         }catch (Exception e)
         {
             e.printStackTrace();
