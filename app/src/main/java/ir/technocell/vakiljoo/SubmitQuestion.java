@@ -25,12 +25,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +58,8 @@ public class SubmitQuestion extends AppCompatActivity {
     private RequestQueue RQ;
     private StringRequest request;
     HashMap<String, String> hashMap = new HashMap<>();
+    private HashMap<String,String> mapUser;
+
 
 
     @Override
@@ -105,6 +109,7 @@ public class SubmitQuestion extends AppCompatActivity {
         mQGroup.setAdapter(categoriesAdapter);
         userData = PreferenceManager.getDefaultSharedPreferences(this);
         userDataEdit = userData.edit();
+        RQ= Volley.newRequestQueue(this);
 
     }
 
@@ -196,8 +201,6 @@ public class SubmitQuestion extends AppCompatActivity {
         return hashMap;
     }
 
-
-
     public static String generateRqCode(int min, int max) {
         String finalCode;
         Random r = new Random();
@@ -205,4 +208,40 @@ public class SubmitQuestion extends AppCompatActivity {
         finalCode = String.valueOf(requestCode);
         return finalCode;
     }
+
+    private void SetOnlineTime()
+    {
+        request=new StringRequest(Request.Method.POST, INFO_URL, new Response.Listener<String>() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onResponse(String response) {
+                if(response.equals("Technocell:Ok"))
+                {
+                    Log.e("OnlineTime-->","Setted");
+                   // GoToNext(Objects.requireNonNull(mapUser.get("U_Type")));
+                }else {
+                    Log.e("OnlineTime-->","NotSetted");
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // error.printStackTrace();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("T_RqType","UpdateTime");
+                map.put("T_RqCode",generateRqCode(28639842,44632547));
+                map.put("U_ID",GetUserID());
+                return map;
+            }
+        };
+        RQ.add(request);
+    }
+
+
+
 }

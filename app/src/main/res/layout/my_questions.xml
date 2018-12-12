@@ -19,8 +19,8 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/mUserImage"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
@@ -29,12 +29,27 @@
                 app:civ_border_color="@color/colorPrimary"
                 app:civ_border_width="2dp" />
 
-            <LinearLayout
-                android:layout_width="279dp"
-                android:layout_height="89dp"
-                android:layout_alignTop="@+id/mTVakilImage"
-                android:layout_alignParentEnd="true"
+            <TextView
                 android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/mNameFamily"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="30"
+                android:text="مرتضی تستی"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                tools:ignore="MissingPrefix" />
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/mTVakilImage"
                 android:layout_marginEnd="107dp"
                 android:layout_marginRight="107dp"
                 android:gravity="right"

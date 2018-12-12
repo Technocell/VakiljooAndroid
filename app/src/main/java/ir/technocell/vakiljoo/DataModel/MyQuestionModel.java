@@ -8,6 +8,25 @@ public class MyQuestionModel {
     private String date;
     private String group;
 
+    private String name;
+
+    public MyQuestionModel(String profile, String title, String content, String date, String group, String name) {
+        this.profile = profile;
+        this.title = title;
+        this.content = content;
+        this.date = date;
+        this.group = group;
+        this.name = name;
+
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
 
     public String getTitle() {
         return title;
@@ -41,12 +60,14 @@ public class MyQuestionModel {
         this.group = group;
     }
 
-    public String getProfile() {
-        return profile;
+    public String getName() {
+        return name;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setName(String name) {
+        this.name = name;
     }
+
+
 }
 
