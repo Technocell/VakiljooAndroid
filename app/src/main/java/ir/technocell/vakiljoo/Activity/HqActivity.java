@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,19 +49,22 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+import ir.technocell.vakiljoo.RecyclerAdapters.DrawerMenuAdapter;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopSoalsAdapter;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilAdapter;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilsRecyclerListener;
+import ir.technocell.vakiljoo.RecyclerItems.DrawerMenuItems;
 import ir.technocell.vakiljoo.RecyclerItems.TopSoalsItem;
 import ir.technocell.vakiljoo.RecyclerItems.TopVakilsItem;
 import ir.technocell.vakiljoo.VisualUtility;
@@ -86,9 +90,11 @@ public class HqActivity extends AppCompatActivity
     private static final String QUESTIONS_URL="http://vakiljoo.com/AppData/Questions.php";
 
     private TextView mDName,mDFamily,mDMoney;
-    private ImageView mChargeWallet,mSite,mAboutUs,mSupport,mWebsite,mSendApp,mExit;
+    CircleImageView profile_image;
     NavigationView navigationView;
     private PlaceholderFragment.SectionsPagerAdapter mSectionsPagerAdapter;
+
+    HashMap<String, String> hashMap = new HashMap<>();
 
 
     @Override
@@ -101,19 +107,21 @@ public class HqActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hq);
-
-        InitDrawerMenu();
+        FontsOverride.setDefaultFont(this, "MONOSPACE", "vazir.ttf");
 
         Init();
         TopButtonsOperator();
-        InitBottomMenu();
         InitDrawerMenu();
         InitDrawerOperations(GetDaMapData());
+
     }
+
+
 
 
     private void InitDrawerMenu()
     {
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mDrawerIcon=findViewById(R.id.mDrawerIcon);
@@ -157,14 +165,18 @@ public class HqActivity extends AppCompatActivity
             }
         });
 
-         navigationView =  findViewById(R.id.nav_view);
+
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+
+
+
 
     }
 
     private HashMap GetDaMapData()
     {
-        HashMap<String, String> hashMap = null;
         try {
 
             Intent intent = getIntent();
@@ -181,74 +193,16 @@ public class HqActivity extends AppCompatActivity
     {
         try {
 
-            mDName = findViewById(R.id.mDName);
-            mDFamily = findViewById(R.id.mDFamily);
-            mDMoney = findViewById(R.id.mDMoney);
-
+            View view=navigationView.getHeaderView(0);
+            mDName = view.findViewById(R.id.mDName);
+            mDFamily = view.findViewById(R.id.mDFamily);
+            mDMoney = view.findViewById(R.id.mDMoney);
+            profile_image=view.findViewById(R.id.profile_image);
             mDName.setText(hashMap.get("U_Name_Show").toString());
             mDFamily.setText(hashMap.get("U_Family_Show").toString());
             mDMoney.setText(hashMap.get("U_Money").toString());
+            Picasso.get().load(hashMap.get("U_ProfilePic").toString()).into(profile_image);
 
-/*
-            mChargeWallet = navigationView.findViewById(R.id.mChargeWallet);
-            mSite = findViewById(R.id.mSite);
-            mAboutUs = findViewById(R.id.mAboutUs);
-            mSupport = findViewById(R.id.mSupport);
-            mWebsite = findViewById(R.id.mWebsite);
-            mSendApp = findViewById(R.id.mSendApp);
-            mExit = findViewById(R.id.mExit);
-
-            mSite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String url = "https://44951295.com";
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                }
-            });
-
-            mExit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                    homeIntent.addCategory(Intent.CATEGORY_HOME);
-                    homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(homeIntent);
-                }
-            });
-
-            mSendApp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                    sharingIntent.setType("text/plain");
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getResources().getString(R.string.shareText));
-                    startActivity(Intent.createChooser(sharingIntent, "لطفا یک مورد را انتخاب کنید"));
-                }
-            });
-
-            mChargeWallet.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toasty.info(getApplicationContext(), "به زودی ...", Toast.LENGTH_SHORT).show();
-                }
-            });
-            mAboutUs.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toasty.info(HqActivity.this, "به زودی ...", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            mSupport.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toasty.info(HqActivity.this, "به زودی ...", Toast.LENGTH_SHORT).show();
-                }
-            });
-            */
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -256,10 +210,7 @@ public class HqActivity extends AppCompatActivity
 
     }
 
-    private void InitBottomMenu()
-    {
 
-    }
 
 
 
@@ -320,8 +271,8 @@ public class HqActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawer.isDrawerOpen(GravityCompat.END)) {
+            drawer.closeDrawer(GravityCompat.END);
         } else {
             super.onBackPressed();
         }
@@ -331,6 +282,7 @@ public class HqActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
        // getMenuInflater().inflate(R.menu.hq, menu);
+
         return true;
     }
 
@@ -349,30 +301,54 @@ public class HqActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.wallet) {
 
-        } else if (id == R.id.nav_slideshow) {
+            Toasty.info(HqActivity.this,"به زودی ...",Toast.LENGTH_SHORT).show();
 
-        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.site) {
+            String url = "https://44951295.com";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.boutus) {
+            Toasty.info(HqActivity.this,"به زودی ...",Toast.LENGTH_SHORT).show();
 
+        } else if (id == R.id.support) {
+            Toasty.info(HqActivity.this,"به زودی ...",Toast.LENGTH_SHORT).show();
+
+
+        } else if (id == R.id.sendapp) {
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, R.string.shareText);
+            startActivity(Intent.createChooser(sharingIntent, "یک مورد را انتخاب کنید."));
+
+        } else if (id == R.id.settings) {
+            Toasty.info(HqActivity.this,"به زودی ...",Toast.LENGTH_SHORT).show();
+
+
+        }else if (id == R.id.exit) {
+
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory( Intent.CATEGORY_HOME );
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
         }
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.END);
         return true;
     }
+
+
 
 
     public static class PlaceholderFragment extends Fragment {
@@ -387,7 +363,9 @@ public class HqActivity extends AppCompatActivity
         private RequestQueue RQ;
 
 
+
         public PlaceholderFragment() {
+
         }
 
 
@@ -409,6 +387,7 @@ public class HqActivity extends AppCompatActivity
                 rootView[0] = inflater.inflate(R.layout.fragment_top_vakils, container, false);
                 InitTopVakilData(rootView[0]);
                 GetTopVakilsFromServer();
+
                 return rootView[0];
             }else if(getArguments().getInt(ARG_SECTION_NUMBER)==1)
             {
@@ -420,17 +399,6 @@ public class HqActivity extends AppCompatActivity
 
             return rootView[0];
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -554,8 +522,9 @@ public class HqActivity extends AppCompatActivity
                 }
             });
 
-            mVakilsAdapter = new TopVakilAdapter(topVakilsList);
 
+
+            mVakilsAdapter = new TopVakilAdapter(topVakilsList);
             mTopVakilsRecycler.setHasFixedSize(true);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
             mTopVakilsRecycler.setLayoutManager(mLayoutManager);
@@ -669,6 +638,32 @@ public class HqActivity extends AppCompatActivity
             case 2:
                 viewHolder.bindImageSlide("http://vakiljoo.com/AppData/Core/Slider/Slider3.png");
                 break;
+        }
+    }
+
+
+}
+final class FontsOverride {
+
+    public static void setDefaultFont(Context context,
+                                      String staticTypefaceFieldName, String fontAssetName) {
+        final Typeface regular = Typeface.createFromAsset(context.getAssets(),
+                fontAssetName);
+        replaceFont(staticTypefaceFieldName, regular);
+    }
+
+    protected static void replaceFont(String staticTypefaceFieldName,
+                                      final Typeface newTypeface) {
+        try {
+            final Field staticField = Typeface.class
+                    .getDeclaredField(staticTypefaceFieldName);
+            staticField.setAccessible(true);
+
+            staticField.set(null, newTypeface);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 

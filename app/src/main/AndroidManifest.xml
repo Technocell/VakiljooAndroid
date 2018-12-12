@@ -36,10 +36,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.VakilInformationActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".UserQuestionsActivity" />
+        <activity android:name=".SubmitQuestion" />
+        <activity
+            android:name=".HqClient"
+            android:label="@string/title_activity_hq_client"
             android:theme="@style/AppTheme"></activity>
-        <activity android:name=".Activity.MainActivity"></activity>
-        <activity android:name=".Activity.LegalIssuePlanlActivity"></activity>
-        <activity android:name=".UserQuestionsActivity"></activity>
     </application>
 
 </manifest>

@@ -22,31 +22,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/bb"
-            android:layout_width="wrap_content"
+
+        <com.isapanah.awesomespinner.AwesomeSpinner
+            android:layout_margin="5dp"
+            android:id="@+id/mQGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:paddingBottom="2dp"
-            android:paddingTop="2dp"
-            android:text="کیفری"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/spinner"
-            android:gravity="center"
-            android:spinnerMode="dropdown" />
-
+            app:spinnerDirection="ltr"
+            app:spinnerHint="Select a category" />
     </RelativeLayout>
 
     <TextView
@@ -148,7 +131,6 @@
 
 
     <TextView
-
         android:id="@+id/x"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -156,7 +138,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/card_view_tt"
-
         app:layout_constraintBottom_toBottomOf="@id/simpleswitch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -270,7 +251,7 @@
         android:id="@+id/mMovakelBtn"
         fontPath="fonts/vazir.ttf"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="55dp"
         android:background="@drawable/btn_back"
         android:text="ثبت و ارسال"
         android:textColor="@color/white"

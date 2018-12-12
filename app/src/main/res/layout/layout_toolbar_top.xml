@@ -10,7 +10,7 @@
         android:paddingBottom="16dp"
         android:id="@+id/img_btn"
         android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_height="28dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="18dp"
         android:background="@drawable/back_btn"

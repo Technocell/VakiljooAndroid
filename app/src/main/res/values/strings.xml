@@ -31,4 +31,5 @@
     <string name="shareText">سلام ، من از اپ وکیل جو استفاده می کنم و خیلی راضی هستم ، توهم از لینک زیر دانلود کن :</string>
     <string name="helpTxt">سوال خود را به صورت کامل و با ذکر جزییات شرح دهید تا مشاوران بتوانند پاسخ دقیق به شما ارایه دهند .
 توجه داشته باشد پس از ارسال امکان ویرایش وجود ندارد .</string>
+    <string name="title_activity_hq_client">HqClient</string>
 </resources>

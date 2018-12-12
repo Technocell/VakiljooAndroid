@@ -8,37 +8,21 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-
-
-
     <include
-        layout="@layout/app_bar_hq"
+        layout="@layout/app_bar_hq_client"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView
-        fontPath="fonts/vazir.ttf"
-
         android:background="@color/colorPrimary"
-        android:layoutDirection="rtl"
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="end"
+        android:layout_gravity=""
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_hq"
-        app:itemIconTint="#ffffff"
+        app:headerLayout="@layout/nav_header_hq_client"
         app:menu="@menu/hq"
-        app:itemTextAppearance="@style/menu_text_style">
-
-<!--
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mDrawerView"
-            android:layout_marginTop="200dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-            -->
-    </android.support.design.widget.NavigationView>
+        app:itemIconTint="#ffffff"
+        app:itemTextAppearance="@style/menu_text_style"/>
 
 </android.support.v4.widget.DrawerLayout>
