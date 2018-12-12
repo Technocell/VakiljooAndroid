@@ -19,4 +19,6 @@
 
     <color name="trans">#00000000</color>
     <color name="cadr_cardview">#efefef</color>
+
+    <color name="transPrimary">#628291</color>
 </resources>

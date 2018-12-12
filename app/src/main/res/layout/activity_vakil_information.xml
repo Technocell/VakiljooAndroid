@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_color"
     android:orientation="vertical"
     tools:context=".Activity.VakilInformationActivity">
@@ -13,8 +15,7 @@
             android:id="@+id/relative_infio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            >
+            android:background="@color/white">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
@@ -30,7 +31,6 @@
                 tools:ignore="MissingConstraints" />
 
             <LinearLayout
-
                 android:id="@+id/line_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,10 +43,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:layout_marginRight="60dp"
                     android:text="@string/name"
                     android:textColor="@color/green_blue_color"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     tools:ignore="MissingPrefix" />
 
 
@@ -54,11 +53,10 @@
                     fontPath="fonts/vazir.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="60dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/family_name"
                     android:textColor="@color/green_blue_color"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     tools:ignore="MissingPrefix" />
             </LinearLayout>
 
@@ -72,21 +70,51 @@
             android:layout_below="@id/relative_infio"
             android:background="@color/green_blue_color" />
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/view_pager_tab"
+    <android.support.v7.widget.CardView
+        card_view:cardElevation="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:weightSum="2"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/line"
-            android:background="@color/colorAccent"
-            app:tabGravity="center"
-            app:tabMode="fixed" />
+            android:layout_height="wrap_content">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager"
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                fancy:fb_textFont="fonts/vazir.ttf"
+                android:layout_weight="1"
+                android:id="@+id/mContactWays"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/mVerifyCode"
+                android:layout_centerHorizontal="true"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_text="راه های تماس"
+                fancy:fb_textSize="25sp" />
+
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                fancy:fb_textFont="fonts/vazir.ttf"
+                android:layout_weight="1"
+                android:id="@+id/mAboutMe"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/mVerifyCode"
+                android:layout_centerHorizontal="true"
+                fancy:fb_defaultColor="@color/white"
+                fancy:fb_text="درباره ی من"
+                fancy:fb_textColor="@color/colorPrimary"
+                fancy:fb_textSize="25sp" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v4.view.ViewPager
+            android:id="@+id/mVakilInfoPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/view_pager_tab"
-            >
+            android:layout_height="wrap_content">
 
         </android.support.v4.view.ViewPager>
 
