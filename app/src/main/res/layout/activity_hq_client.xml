@@ -16,11 +16,13 @@
 
 
     <android.support.design.widget.NavigationView
+        android:layoutDirection="rtl"
+
         android:background="@color/colorPrimary"
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity=""
+        android:layout_gravity="end"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_hq_client"
         app:menu="@menu/hq"

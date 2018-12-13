@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.HqActivity"
-    tools:showIn="@layout/app_bar_hq"
-    android:orientation="vertical">
+    tools:showIn="@layout/app_bar_hq">
 
     <ss.com.bannerslider.Slider
         android:id="@+id/mSlider"
         android:layout_width="match_parent"
-        android:layout_height="540px"
-        />
+        android:layout_height="540px" />
 
-        <android.support.v7.widget.CardView
-            card_view:cardElevation="8dp"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardElevation="8dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:weightSum="2"
-                android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/mTopSoalsBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="55dp"
+                android:layout_below="@+id/mVerifyCode"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_text="سوالات متداول"
+                fancy:fb_textFont="fonts/vazir.ttf"
+                fancy:fb_textSize="25sp" />
 
 
-        <mehdi.sakout.fancybuttons.FancyButton
-            fancy:fb_textFont="fonts/vazir.ttf"
-            android:layout_weight="1"
-            android:id="@+id/mTopSoalsBtn"
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/mTopVakils"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/mVerifyCode"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                fancy:fb_defaultColor="@color/white"
+                fancy:fb_text="وکلای برتر"
+                fancy:fb_textColor="@color/colorPrimary"
+                fancy:fb_textFont="fonts/vazir.ttf"
+                fancy:fb_textSize="25sp" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mTopsViewPager"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_below="@+id/mVerifyCode"
-            android:layout_centerHorizontal="true"
-            fancy:fb_defaultColor="@color/colorPrimary"
-            fancy:fb_text="سوالات متداول"
-            fancy:fb_textSize="25sp" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
+        <include layout="@layout/bottom_layout_client" />
 
-        <mehdi.sakout.fancybuttons.FancyButton
-            fancy:fb_textFont="fonts/vazir.ttf"
-            android:layout_weight="1"
-            android:id="@+id/mTopVakils"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_below="@+id/mVerifyCode"
-            android:layout_centerHorizontal="true"
-            fancy:fb_defaultColor="@color/white"
-            fancy:fb_text="وکلای برتر"
-            fancy:fb_textColor="@color/colorPrimary"
-            fancy:fb_textSize="25sp" />
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-<LinearLayout
-    android:weightSum="1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-<android.support.v4.view.ViewPager
-    android:layout_weight="1"
-    android:id="@+id/mTopsViewPager"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
-
-    <include layout="@layout/bottom_layout_client"
-        />
-
-</LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

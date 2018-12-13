@@ -1,5 +1,7 @@
 package ir.technocell.vakiljoo;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,6 +34,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import es.dmoral.toasty.Toasty;
+import ir.technocell.vakiljoo.Activity.HqActivity;
 import ir.technocell.vakiljoo.Adapter.HqClientAdapter;
 import ir.technocell.vakiljoo.DataModel.MyQuestionModel;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilsRecyclerListener;
@@ -53,6 +60,7 @@ public class HqClient extends AppCompatActivity
         init();
         InitRecycler();
         GetInfo();
+        
     }
 
     private void init() {
@@ -68,11 +76,11 @@ public class HqClient extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         recyclerviewQuestion = findViewById(R.id.mRecyclerview);
         Rq= Volley.newRequestQueue(this);
-        
 
-    
+
+
     }
-    
+
     private void InitRecycler()
     {
         Rq=Volley.newRequestQueue(this);
@@ -152,8 +160,8 @@ public class HqClient extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawer.isDrawerOpen(GravityCompat.END)) {
+            drawer.closeDrawer(GravityCompat.END);
         } else {
             super.onBackPressed();
         }
@@ -181,28 +189,57 @@ public class HqClient extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.wallet) {
 
-        } else if (id == R.id.nav_slideshow) {
+            Toasty.info(HqClient.this,"به زودی ...",Toast.LENGTH_SHORT).show();
 
-        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.site) {
+            String url = "https://44951295.com";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.boutus) {
+            Toasty.info(HqClient.this,"به زودی ...",Toast.LENGTH_SHORT).show();
 
+        } else if (id == R.id.support) {
+            Toasty.info(HqClient.this,"به زودی ...",Toast.LENGTH_SHORT).show();
+
+
+        } else if (id == R.id.sendapp) {
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, R.string.shareText);
+            startActivity(Intent.createChooser(sharingIntent, "یک مورد را انتخاب کنید."));
+
+        } else if (id == R.id.settings) {
+            Toasty.info(HqClient.this,"به زودی ...",Toast.LENGTH_SHORT).show();
+
+
+        }else if (id == R.id.exit) {
+
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory( Intent.CATEGORY_HOME );
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.END);
         return true;
     }
+
+
+
+
+
+
+
 }
