@@ -1,8 +1,6 @@
 package ir.technocell.vakiljoo;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,23 +22,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import ir.technocell.vakiljoo.Adapter.HqClientAdapter;
 import ir.technocell.vakiljoo.DataModel.MyQuestionModel;
-import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilAdapter;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilsRecyclerListener;
-import ir.technocell.vakiljoo.RecyclerItems.TopVakilsItem;
+
 
 public class HqClient extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
