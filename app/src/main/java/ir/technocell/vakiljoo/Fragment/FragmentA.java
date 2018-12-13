@@ -18,11 +18,4 @@ public class FragmentA  extends android.support.v4.app.Fragment{
         return inflater.inflate(R.layout.layout_fragment_a, container, false);
     }
 
-  /*  @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-       /* recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view);
-        adressAdapter=new AdressAdapter(getActivity());
-        recyclerView.setAdapter(adressAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-    }*/
 }

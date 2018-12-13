@@ -12,6 +12,8 @@
         layout="@layout/app_bar_hq_client"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    
+
 
     <android.support.design.widget.NavigationView
         android:background="@color/colorPrimary"
@@ -24,5 +26,6 @@
         app:menu="@menu/hq"
         app:itemIconTint="#ffffff"
         app:itemTextAppearance="@style/menu_text_style"/>
+
 
 </android.support.v4.widget.DrawerLayout>
