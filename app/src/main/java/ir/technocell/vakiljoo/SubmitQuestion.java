@@ -1,18 +1,23 @@
 package ir.technocell.vakiljoo;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -26,30 +31,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.isapanah.awesomespinner.AwesomeSpinner;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
 
-import ir.technocell.vakiljoo.Activity.HqActivity;
-import ir.technocell.vakiljoo.RecyclerItems.TopVakilsItem;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class SubmitQuestion extends AppCompatActivity {
 
 
-    private AwesomeSpinner mQGroup;
+    private Spinner mQGroup;
     private TextView mQuestionTitle, mQuestionText, mQuestionTextCount;
     private Switch mQurstionState;
-    private Button mSend;
+    private FancyButton mSend;
 
 
     private static String INFO_URL = "http://vakiljoo.com/AppData/Questions.php";
@@ -59,8 +57,14 @@ public class SubmitQuestion extends AppCompatActivity {
     private StringRequest request;
     HashMap<String, String> hashMap = new HashMap<>();
     private HashMap<String,String> mapUser;
+    View view;
+    ImageView mMohasebat,mMap,mChats,mTrhSoal,mHome,mProfile;
 
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,10 @@ public class SubmitQuestion extends AppCompatActivity {
         setContentView(R.layout.activity_submit_question);
         GetDaMapData();
         Init();
+        SetupHeader();
+        SetCounterText();
+        InitBottomMenu();
+        BottomMenuOperations();
         mSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,30 +94,100 @@ public class SubmitQuestion extends AppCompatActivity {
                 }).show();
             }
         });
+
+    }
+
+    private void InitBottomMenu()
+    {
+        view=findViewById(R.id.mBottomMenuMother);
+        //  mMap=view.findViewById(R.id.mMap);
+       // mTrhSoal=view.findViewById(R.id.mTrhSoal);
+     //   mChats=view.findViewById(R.id.mChats);
+     //   mHome=view.findViewById(R.id.mHome);
+       // mProfile=view.findViewById(R.id.mProfile);
+    }
+    private void BottomMenuOperations()
+    {
+        /*
+        mHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("Tager:->","yes");
+                Intent iGOToActivity=new Intent(SubmitQuestion.this,HqActivity.class);
+                startActivity(iGOToActivity);
+            }
+        });
+        mTrhSoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toasty.info(SubmitQuestion.this,"شما اینجا هستید !",Toast.LENGTH_SHORT).show();
+            }
+        });
+        */
+    }
+
+    private void SetCounterText()
+    {
+        mQuestionText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                mQuestionTextCount.setText(charSequence.length()+"/500");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+    private void SetupHeader()
+    {
+
+        View HeaderView=findViewById(R.id.mHeaderMother);
+        ImageButton
+        mHBackBtn=HeaderView.findViewById(R.id.mHBackBtn);
+        mHBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent BACK = new Intent(SubmitQuestion.this,UserQuestionsActivity.class);
+                startActivity(BACK);
+            }
+        });
     }
 
     private void Init() {
-        mQGroup = findViewById(R.id.mQGroup);
-        mQuestionTitle = findViewById(R.id.aq);
-        mQuestionText = findViewById(R.id.cq);
-        mQuestionTextCount = findViewById(R.id.vq);
-        mQurstionState = findViewById(R.id.simpleswitch);
-       mSend = findViewById(R.id.mMovakelBtn);
+        View view=findViewById(R.id.mSubmitQuestionMother);
+        mQGroup = view.findViewById(R.id.mGroup);
+        mQuestionTitle = view.findViewById(R.id.mTitle);
+        mQuestionText = view.findViewById(R.id.mQText);
+        mQuestionTextCount = view.findViewById(R.id.mTextCounter);
+        mQurstionState = view.findViewById(R.id.mIsPublic);
+       mSend = view.findViewById(R.id.mMovakelBtn);
 
 
-        /*ArrayAdapter<CharSequence> provincesAdapter = ArrayAdapter.createFromResource(this,
-        R.array.spinnerItems, android.R.layout.simple_spinner_item);
-
-        mQGroup.setAdapter(provincesAdapter, 0);*/
         List<String> categories = new ArrayList<String>();
-        categories.add("Automobile");
-        categories.add("Ariplane");
-        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(this,
-                R.layout.spinner_list_item, categories);
+        categories.add("حقوقی");
+        categories.add("کیفری");
+        categories.add("خانواده");
+        categories.add("ثبت احوال");
+        categories.add("امور مهاجرت");
+
+
+        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner, categories);
+
         mQGroup.setAdapter(categoriesAdapter);
+
+
         userData = PreferenceManager.getDefaultSharedPreferences(this);
         userDataEdit = userData.edit();
         RQ= Volley.newRequestQueue(this);
+
+
 
     }
 
@@ -209,38 +287,6 @@ public class SubmitQuestion extends AppCompatActivity {
         return finalCode;
     }
 
-    private void SetOnlineTime()
-    {
-        request=new StringRequest(Request.Method.POST, INFO_URL, new Response.Listener<String>() {
-            @TargetApi(Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onResponse(String response) {
-                if(response.equals("Technocell:Ok"))
-                {
-                    Log.e("OnlineTime-->","Setted");
-                   // GoToNext(Objects.requireNonNull(mapUser.get("U_Type")));
-                }else {
-                    Log.e("OnlineTime-->","NotSetted");
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // error.printStackTrace();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<String,String>();
-                map.put("T_RqType","UpdateTime");
-                map.put("T_RqCode",generateRqCode(28639842,44632547));
-                map.put("U_ID",GetUserID());
-                return map;
-            }
-        };
-        RQ.add(request);
-    }
 
 
 

@@ -1,5 +1,6 @@
 package ir.technocell.vakiljoo.RecyclerAdapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,16 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import ir.technocell.vakiljoo.R;
 import ir.technocell.vakiljoo.RecyclerItems.TopSoalsItem;
 
 public class TopSoalsAdapter extends RecyclerView.Adapter<TopSoalsAdapter.MyViewHolder> {
 
     private List<TopSoalsItem> SoalList;
-
-    public TopSoalsAdapter(List<TopSoalsItem> soalList) {
+    private Context context;
+    public TopSoalsAdapter(List<TopSoalsItem> soalList, Context context) {
+        this.context=context;
         SoalList = soalList;
     }
 
@@ -33,13 +39,44 @@ public class TopSoalsAdapter extends RecyclerView.Adapter<TopSoalsAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
         TopSoalsItem tops=SoalList.get(i);
-        myViewHolder.mSKolase.setText(tops.getSoalTitle());
+        myViewHolder.mSKolase.setText(tops.getSoalKholase());
         myViewHolder.mSNameFamily.setText(tops.getNameoFamily());
         myViewHolder.mSDate.setText(tops.getDate());
         myViewHolder.mSId.setText(tops.getId());
+        myViewHolder.mSTitle.setText(tops.getSoalTitle());
+        if(isPublicOperation(tops.getIsPublic()))
+        {
+            myViewHolder.mSNameFamily.setText(tops.getNameoFamily());
+            Picasso.get().load("http://vakiljoo.com/AppData/Core/ProfilePics/"+tops.getUserId()+".png").placeholder(R.drawable.vakile_profile).into(myViewHolder.mClientImage, new Callback() {
+                @Override
+                public void onSuccess() {
 
+                }
+
+                @Override
+                public void onError(Exception e) {
+                   // Picasso.get().load("android.resource://ir.technocell.vakiljoo/drawable/vakile_profile.png").into(myViewHolder.mClientImage);
+
+                }
+            });
+        }else {
+            myViewHolder.mSNameFamily.setText("ناشناس");
+            Picasso.get().load("android.resource://ir.technocell.vakiljoo/drawable/vakile_profile.png").placeholder(R.drawable.vakile_profile).into(myViewHolder.mClientImage);
+        }
+
+
+    }
+
+    private boolean isPublicOperation(String isPublic)
+    {
+            if(isPublic.equals("True") || isPublic.equals("true"))
+            {
+                return true;
+            }else {
+                return false;
+            }
     }
 
     @Override
@@ -49,7 +86,8 @@ public class TopSoalsAdapter extends RecyclerView.Adapter<TopSoalsAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mSKolase,mSNameFamily,mSDate,mSId;
+        public TextView mSKolase,mSNameFamily,mSDate,mSId,mSTitle;
+        public CircleImageView mClientImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +95,9 @@ public class TopSoalsAdapter extends RecyclerView.Adapter<TopSoalsAdapter.MyView
             mSNameFamily =  itemView.findViewById(R.id.mSNameFamily);
             mSDate =  itemView.findViewById(R.id.mSDate);
             mSId =  itemView.findViewById(R.id.mSId);
+            mSTitle=itemView.findViewById(R.id.mSTitle);
+            mClientImage=itemView.findViewById(R.id.mClientImage);
+
         }
     }
 }

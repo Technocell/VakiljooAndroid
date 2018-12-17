@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
+    android:id="@+id/mBottomMenuMother"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -13,12 +14,14 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/mMohasebat"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:layout_width="@dimen/bottomMenuSize"
             android:layout_height="@dimen/bottomMenuSize"
             android:src="@drawable/mehasebat_icon"/>
         <ImageView
+            android:id="@+id/mMap"
             android:layout_margin="5dp"
 
             android:layout_weight="1"
@@ -27,6 +30,7 @@
             android:src="@drawable/map_icon"/>
 
         <ImageView
+            android:id="@+id/mChats"
             android:layout_weight="1"
             android:layout_margin="5dp"
 
@@ -34,6 +38,7 @@
             android:layout_height="@dimen/bottomMenuSize"
             android:src="@drawable/chat_icon"/>
         <ImageView
+            android:id="@+id/mTrhSoal"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:layout_width="@dimen/bottomMenuSize"
@@ -42,6 +47,7 @@
 
 
         <ImageView
+            android:id="@+id/mHome"
             android:layout_margin="5dp"
 
             android:layout_weight="1"

@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentA_Client.OnFragmentInteractionListener} interface
+ * {@link AboutVakilForUsers.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentA_Client#newInstance} factory method to
+ * Use the {@link AboutVakilForUsers#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentA_Client extends Fragment {
+public class AboutVakilForUsers extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +29,7 @@ public class FragmentA_Client extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FragmentA_Client() {
+    public AboutVakilForUsers() {
         // Required empty public constructor
     }
 
@@ -39,11 +39,11 @@ public class FragmentA_Client extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentA_Client.
+     * @return A new instance of fragment AboutVakilForUsers.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentA_Client newInstance(String param1, String param2) {
-        FragmentA_Client fragment = new FragmentA_Client();
+    public static AboutVakilForUsers newInstance(String param1, String param2) {
+        AboutVakilForUsers fragment = new AboutVakilForUsers();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +64,7 @@ public class FragmentA_Client extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_a__client, container, false);
+        return inflater.inflate(R.layout.fragment_about_vakil_for_users, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

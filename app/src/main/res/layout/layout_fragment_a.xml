@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -10,7 +10,7 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_marginTop="12dp"
@@ -18,17 +18,14 @@
             card_view:cardElevation="5dp">
 
             <EditText
-                android:paddingBottom="120dp"
+                android:minLines="7"
                 android:id="@+id/mAboutMeText"
                 fontPath="fonts/vazir.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="10dp"
-                android:ems="10"
+                android:layout_margin="12dp"
                 android:hint="درباره ی خودتان بنویسید ..."
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:lines="8"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
@@ -36,6 +33,7 @@
         </android.support.v7.widget.CardView>
 
     <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_gravity="bottom"
         android:layout_margin="10dp"
         android:id="@+id/mSendAboutBtn"
         android:layout_width="match_parent"

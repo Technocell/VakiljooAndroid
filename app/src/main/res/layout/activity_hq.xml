@@ -9,16 +9,14 @@
     tools:openDrawer="start">
 
 
-
-
     <include
         layout="@layout/app_bar_hq"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
     <android.support.design.widget.NavigationView
         fontPath="fonts/vazir.ttf"
-
         android:background="@color/colorPrimary"
         android:layoutDirection="rtl"
         android:id="@+id/nav_view"
@@ -31,6 +29,7 @@
         app:menu="@menu/hq"
         app:itemTextAppearance="@style/menu_text_style">
 
+
 <!--
         <android.support.v7.widget.RecyclerView
             android:id="@+id/mDrawerView"
@@ -39,6 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
             -->
+
+
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

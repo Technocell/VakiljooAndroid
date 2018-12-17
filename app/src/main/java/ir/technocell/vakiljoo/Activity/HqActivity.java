@@ -2,38 +2,34 @@ package ir.technocell.vakiljoo.Activity;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -42,8 +38,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -60,21 +54,21 @@ import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
-import ir.technocell.vakiljoo.RecyclerAdapters.DrawerMenuAdapter;
+import ir.technocell.vakiljoo.R;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopSoalsAdapter;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilAdapter;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilsRecyclerListener;
-import ir.technocell.vakiljoo.RecyclerItems.DrawerMenuItems;
 import ir.technocell.vakiljoo.RecyclerItems.TopSoalsItem;
 import ir.technocell.vakiljoo.RecyclerItems.TopVakilsItem;
+import ir.technocell.vakiljoo.SearchVakil;
+import ir.technocell.vakiljoo.UserQuestionsActivity;
+import ir.technocell.vakiljoo.VakilInfoForUser;
 import ir.technocell.vakiljoo.VisualUtility;
 import mehdi.sakout.fancybuttons.FancyButton;
 import ss.com.bannerslider.ImageLoadingService;
 import ss.com.bannerslider.Slider;
 import ss.com.bannerslider.adapters.SliderAdapter;
 import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
-
-import ir.technocell.vakiljoo.R;
 
 public class HqActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -85,7 +79,8 @@ public class HqActivity extends AppCompatActivity
     private  boolean drawerState=false;
     private RequestQueue RQ;
     private LayoutInflater inflater;
-    private ImageView mDrawerIcon;
+    private ImageView mDrawerIcon,mSearchImgBtn;
+    private TextView mSearchTxtBtn;
     private static final String USERS_URL="http://vakiljoo.com/AppData/Users.php";
     private static final String QUESTIONS_URL="http://vakiljoo.com/AppData/Questions.php";
 
@@ -93,9 +88,10 @@ public class HqActivity extends AppCompatActivity
     CircleImageView profile_image;
     NavigationView navigationView;
     private PlaceholderFragment.SectionsPagerAdapter mSectionsPagerAdapter;
+    View view;
+    ImageView mMohasebat,mMap,mChats,mTrhSoal,mHome,mProfile;
 
     HashMap<String, String> hashMap = new HashMap<>();
-
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -112,19 +108,77 @@ public class HqActivity extends AppCompatActivity
         Init();
         TopButtonsOperator();
         InitDrawerMenu();
+        try {
+
+
+            if (savedInstanceState.isEmpty() || savedInstanceState == null) {
+                InitDrawerOperations(GetDaMapData());
+            } else {
+                InitDrawerSaveLoadOperations(savedInstanceState.getBundle("mapData"));
+            }
+        }catch (Exception e){ e.printStackTrace(); }
         InitDrawerOperations(GetDaMapData());
+        InitBottomMenu();
+        BottomMenuOperations();
 
     }
 
+    private void BottomMenuOperations()
+    {
+        mTrhSoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("Tager:->","yes");
+                Intent iGOToActivity=new Intent(HqActivity.this,UserQuestionsActivity.class);
+                startActivity(iGOToActivity);
+            }
+        });
+
+    }
+
+private void InitBottomMenu()
+{
+    view=findViewById(R.id.mBottomMenuMother);
+    mTrhSoal=view.findViewById(R.id.mTrhSoal);
+   // mMohasebat=view.findViewById(R.id.mMohasebat);
+  //  mMap=view.findViewById(R.id.mMap);
+    mChats=view.findViewById(R.id.mChats);
+  //  mTrhSoal=view.findViewById(R.id.mTrhSoal);
+    mHome=view.findViewById(R.id.mHome);
+    mProfile=view.findViewById(R.id.mProfile);
+
+}
 
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return false;
+    }
 
     private void InitDrawerMenu()
     {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         mDrawerIcon=findViewById(R.id.mDrawerIcon);
+        mSearchImgBtn=findViewById(R.id.mSearchImgBtn);
+        mSearchTxtBtn=findViewById(R.id.mSearchTxtBtn);
+        mSearchImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iGoToSoal=new Intent(HqActivity.this,SearchVakil.class);
+                startActivity(iGoToSoal);
+            }
+        });
+        mSearchTxtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iGoToSoal=new Intent(HqActivity.this,SearchVakil.class);
+                startActivity(iGoToSoal);
+            }
+        });
+
         final DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -166,6 +220,7 @@ public class HqActivity extends AppCompatActivity
         });
 
 
+
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -174,6 +229,8 @@ public class HqActivity extends AppCompatActivity
 
 
     }
+
+
 
     private HashMap GetDaMapData()
     {
@@ -210,6 +267,27 @@ public class HqActivity extends AppCompatActivity
 
     }
 
+    private void InitDrawerSaveLoadOperations(Bundle data)
+    {
+         HashMap<String,String> hashMap=(HashMap<String, String>) data.getSerializable("mapData");
+        try {
+
+            View view=navigationView.getHeaderView(0);
+            mDName = view.findViewById(R.id.mDName);
+            mDFamily = view.findViewById(R.id.mDFamily);
+            mDMoney = view.findViewById(R.id.mDMoney);
+            profile_image=view.findViewById(R.id.profile_image);
+            mDName.setText(hashMap.get("U_Name_Show").toString());
+            mDFamily.setText(hashMap.get("U_Family_Show").toString());
+            mDMoney.setText(hashMap.get("U_Money").toString());
+            Picasso.get().load(hashMap.get("U_ProfilePic").toString()).into(profile_image);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
 
 
 
@@ -267,6 +345,11 @@ public class HqActivity extends AppCompatActivity
         return finalCode;
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("mapData",hashMap);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public void onBackPressed() {
@@ -437,7 +520,10 @@ public class HqActivity extends AppCompatActivity
                                     ,object.getString("U_Education"),
                                     object.getString("U_Expertise"),
                                     object.getString("U_Rate"),
-                                    object.getString("U_ProfilePic"));
+                                    object.getString("U_ProfilePic"),
+                                    object.getString("U_AboutVakil"),
+                                    object.getString("U_LastOnline"),
+                                    object.getString("U_ID"));
                             topVakilsList.add(topVakilsItem);
                         }
                         mVakilsAdapter.notifyDataSetChanged();
@@ -479,7 +565,7 @@ public class HqActivity extends AppCompatActivity
                         for(int c=0;c<jsonArray.length();c++)
                         {
                             JSONObject object=jsonArray.getJSONObject(c);
-                            TopSoalsItem topSoalsItem=new TopSoalsItem(object.getString("Q_Question"),object.getString("Q_UName")+" "+object.getString("Q_UFamily"), object.getString("Q_Date"), object.getString("Q_ID"));
+                            TopSoalsItem topSoalsItem=new TopSoalsItem(object.getString("Q_Title"),object.getString("Q_Question"),object.getString("Q_UName")+" "+object.getString("Q_UFamily"), object.getString("Q_Date"), object.getString("Q_ID"),object.getString("Q_isPublic"),object.getString("Q_UID"));
                             topSoalsList.add(topSoalsItem);
                         }
                         mTopSoalsAdapter.notifyDataSetChanged();
@@ -524,7 +610,7 @@ public class HqActivity extends AppCompatActivity
 
 
 
-            mVakilsAdapter = new TopVakilAdapter(topVakilsList);
+            mVakilsAdapter = new TopVakilAdapter(topVakilsList,getContext());
             mTopVakilsRecycler.setHasFixedSize(true);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
             mTopVakilsRecycler.setLayoutManager(mLayoutManager);
@@ -539,6 +625,10 @@ public class HqActivity extends AppCompatActivity
                     TopVakilsItem topVakilsItem = topVakilsList.get(position);
 
                     Log.e("This is Top man-->",topVakilsItem.getName());
+
+                    Intent iGoToSoal=new Intent(getContext(),VakilInfoForUser.class);
+                    iGoToSoal.putExtra("QID",topVakilsItem.getVakilID());
+                    startActivity(iGoToSoal);
 
                 }
 
@@ -560,7 +650,7 @@ public class HqActivity extends AppCompatActivity
                 }
             });
 
-            mTopSoalsAdapter = new TopSoalsAdapter(topSoalsList);
+            mTopSoalsAdapter = new TopSoalsAdapter(topSoalsList,getContext());
 
             mTopSoalsRecycler.setHasFixedSize(true);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -573,9 +663,10 @@ public class HqActivity extends AppCompatActivity
                 @Override
                 public void onClick(View view, int position) {
 
-                    TopSoalsItem topVakilsItem = topSoalsList.get(position);
+                    TopSoalsItem topSoalsItem = topSoalsList.get(position);
 
-                    Log.e("This is Top man-->",topVakilsItem.getNameoFamily());
+                    Log.e("This is Top man-->",topSoalsItem.getNameoFamily());
+
 
                 }
 

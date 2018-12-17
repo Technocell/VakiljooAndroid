@@ -28,7 +28,7 @@
                     android:layout_centerVertical="true"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/search_icon" />
+                    android:src="@drawable/filter" />
 
                 <ImageView
                     android:id="@+id/mDrawerIcon"
@@ -40,17 +40,16 @@
                     android:src="@drawable/drawer_icon" />
 
                 <TextView
+                    android:id="@+id/mFilter"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
                     android:gravity="center"
-                    android:text="جست و جوی وکیل"
-                    android:layout_centerInParent="true"
                     fontPath="fonts/vazir.ttf"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:ems="8"
-                    android:hint="جست و جوی وکیل"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginLeft="30dp"
+                    android:text="فیلتر سوالات"
                     android:textAlignment="center"
                     tools:ignore="MissingPrefix" />
 

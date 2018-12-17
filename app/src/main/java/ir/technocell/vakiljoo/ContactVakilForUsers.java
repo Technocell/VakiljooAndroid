@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentB_Client.OnFragmentInteractionListener} interface
+ * {@link ContactVakilForUsers.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentB_Client#newInstance} factory method to
+ * Use the {@link ContactVakilForUsers#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentB_Client extends Fragment {
+public class ContactVakilForUsers extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +29,7 @@ public class FragmentB_Client extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FragmentB_Client() {
+    public ContactVakilForUsers() {
         // Required empty public constructor
     }
 
@@ -39,11 +39,11 @@ public class FragmentB_Client extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentB_Client.
+     * @return A new instance of fragment ContactVakilForUsers.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentB_Client newInstance(String param1, String param2) {
-        FragmentB_Client fragment = new FragmentB_Client();
+    public static ContactVakilForUsers newInstance(String param1, String param2) {
+        ContactVakilForUsers fragment = new ContactVakilForUsers();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +64,7 @@ public class FragmentB_Client extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_b__client, container, false);
+        return inflater.inflate(R.layout.fragment_contact_vakil_for_users, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

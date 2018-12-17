@@ -1,17 +1,22 @@
 package ir.technocell.vakiljoo;
 
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,10 +36,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import es.dmoral.toasty.Toasty;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+import ir.technocell.vakiljoo.Activity.HqActivity;
 import ir.technocell.vakiljoo.RecyclerAdapters.MyQuestionAdapter;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilsRecyclerListener;
 import ir.technocell.vakiljoo.RecyclerItems.MySoalsItem;
-import ir.technocell.vakiljoo.RecyclerItems.TopVakilsItem;
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class UserQuestionsActivity extends AppCompatActivity {
 
@@ -47,6 +55,18 @@ public class UserQuestionsActivity extends AppCompatActivity {
     private static final String QUESTION_URL="http://vakiljoo.com/AppData/Questions.php";
     private SharedPreferences userData;
     private SharedPreferences.Editor userDataEdit;
+    private View HeaderView;
+    private ImageButton mHBackBtn;
+    private FancyButton mNewQuestionBtn;
+
+    View view;
+    ImageView mMohasebat,mMap,mChats,mTrhSoal,mHome,mProfile;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +74,52 @@ public class UserQuestionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_questions);
         InitUseQuestions();
         GetQuestions();
-
+        SetupHeader();
+        InitBottomMenu();
+        BottomMenuOperations();
     }
 
+    private void SetupHeader()
+    {
+        HeaderView=findViewById(R.id.mHeaderMother);
+        mHBackBtn=HeaderView.findViewById(R.id.mHBackBtn);
+        mHBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent BACK = new Intent(UserQuestionsActivity.this,HqActivity.class);
+                startActivity(BACK);
+            }
+        });
+    }
+    private void InitBottomMenu()
+    {
+        view=findViewById(R.id.mBottomMenuMother);
+        mTrhSoal=view.findViewById(R.id.mTrhSoal);
+        mMohasebat=view.findViewById(R.id.mMohasebat);
+        mMap=view.findViewById(R.id.mMap);
+        mChats=view.findViewById(R.id.mChats);
+        mTrhSoal=view.findViewById(R.id.mTrhSoal);
+        mHome=view.findViewById(R.id.mHome);
+    }
+    private void BottomMenuOperations()
+    {
+        mHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("Tager:->","yes");
+                Intent iGOToActivity=new Intent(UserQuestionsActivity.this,HqActivity.class);
+                startActivity(iGOToActivity);
+            }
+        });
+        mTrhSoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toasty.info(UserQuestionsActivity.this,"شما اینجا هستید !",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
 
     private void GetQuestions() {
 
@@ -64,6 +127,7 @@ public class UserQuestionsActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try{
+                    Log.e("Response of my Soals-->",response.toString());
                     JSONArray jsonArray=new JSONArray(response.toString());
                     for(int c=0;c<jsonArray.length();c++)
                     {
@@ -145,5 +209,14 @@ public class UserQuestionsActivity extends AppCompatActivity {
 
             }
         }));
+        mNewQuestionBtn=findViewById(R.id.mNewQuestionBtn);
+        mNewQuestionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent submitq = new Intent(UserQuestionsActivity.this,SubmitQuestion.class);
+                startActivity(submitq);
+            }
+        });
     }
+
 }

@@ -1,6 +1,5 @@
 package ir.technocell.vakiljoo.Adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,7 +38,7 @@ public class HqClientAdapter extends RecyclerView.Adapter<HqClientAdapter.HqClie
         hqClientViewHolder.date.setText(myQuestionModel.getDate());
         hqClientViewHolder.group.setText(myQuestionModel.getGroup());
         hqClientViewHolder.nameFamily.setText(myQuestionModel.getName());
-        Picasso.get().load(myQuestionModel.getProfile()).into(hqClientViewHolder.profile);
+        Picasso.get().load(myQuestionModel.getProfile()).placeholder(R.drawable.vakile_profile).error(R.drawable.vakile_profile).into(hqClientViewHolder.profile);
     }
 
     @Override

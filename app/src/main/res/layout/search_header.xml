@@ -25,29 +25,20 @@
                 android:layout_height="match_parent">
 
 
-            <ImageView
-                android:id="@+id/mSearchImgBtn"
-
-                android:layout_centerVertical="true"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/search_icon" />
-
                 <ImageView
-                    android:id="@+id/mDrawerIcon"
-                    android:layout_marginRight="20dp"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/mBackBtn"
                     android:layout_centerVertical="true"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/drawer_icon" />
+                    android:src="@drawable/back_btn" />
 
-                <TextView
-                    android:id="@+id/mSearchTxtBtn"
+
+                <EditText
+                    android:id="@+id/mSeachTextBar"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
                     android:gravity="center"
-                    android:text="جست و جوی وکیل"
+                    android:hint="جست و جوی وکیل"
                     android:layout_centerInParent="true"
                     fontPath="fonts/vazir.ttf"
                     tools:ignore="MissingPrefix"
@@ -55,9 +46,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:ems="8"
-                    android:hint="جست و جوی وکیل"
                     android:textAlignment="center"
-                     />
+                    />
 
 
             </RelativeLayout>
@@ -66,6 +56,5 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_hq" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -9,15 +9,24 @@ public class MyQuestionModel {
     private String group;
 
     private String name;
+    private String id;
 
-    public MyQuestionModel(String profile, String title, String content, String date, String group, String name) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public MyQuestionModel(String profile, String title, String content, String date, String group, String name,String id) {
         this.profile = profile;
         this.title = title;
         this.content = content;
         this.date = date;
         this.group = group;
         this.name = name;
-
+        this.id=id;
     }
 
     public String getProfile() {

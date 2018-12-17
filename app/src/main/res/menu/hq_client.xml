@@ -2,8 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+
+        android:id="@+id/mPopKeyfari"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="کیفری"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/mPopHoghoghi"
+        android:orderInCategory="100"
+        android:title="حقوقی"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mPopKhaaavenadaaa"
+        android:orderInCategory="100"
+        android:title="خانواده"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mPopSabtAhval"
+        android:orderInCategory="100"
+        android:title="ثبت احوال"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mPopMohajerat"
+        android:orderInCategory="100"
+        android:title="امور مهاجرت"
+        app:showAsAction="never" />
+
 </menu>

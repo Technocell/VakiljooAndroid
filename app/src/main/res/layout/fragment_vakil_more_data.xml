@@ -33,6 +33,7 @@
         android:layout_height="55dp"
         android:layout_below="@+id/mVerifyCode"
         android:layout_centerHorizontal="true"
+        fancy:fb_textFont="fonts/vazir.ttf"
 
         fancy:fb_defaultColor="@color/orange"
         fancy:fb_radius="10dp"
@@ -137,6 +138,8 @@
 
 
     <mehdi.sakout.fancybuttons.FancyButton
+        fancy:fb_textFont="fonts/vazir.ttf"
+
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
