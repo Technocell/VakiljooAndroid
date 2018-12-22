@@ -40,7 +40,7 @@ public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         DrawerMenuItems menuItems=drawerMenuItems.get(i);
         myViewHolder.mDTitle.setText(menuItems.getTitle().toString());
-        Picasso.get().load(uri.parse("android.resource://ir.technocell.vakiljoo/drawable/d_"+i+".png")).into(myViewHolder.mDIcon);
+        Picasso.get().load(uri.parse("android.resource://ir.technocell.vakiljoo/drawable/d_"+i+".jpeg")).into(myViewHolder.mDIcon);
     }
 
     @Override

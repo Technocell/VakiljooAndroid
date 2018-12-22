@@ -1,12 +1,19 @@
 package ir.technocell.vakiljoo.Activity;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +28,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,6 +39,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.GravityEnum;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,12 +49,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +78,7 @@ import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilAdapter;
 import ir.technocell.vakiljoo.RecyclerAdapters.TopVakilsRecyclerListener;
 import ir.technocell.vakiljoo.RecyclerItems.TopSoalsItem;
 import ir.technocell.vakiljoo.RecyclerItems.TopVakilsItem;
+import ir.technocell.vakiljoo.Register;
 import ir.technocell.vakiljoo.SearchVakil;
 import ir.technocell.vakiljoo.UserQuestionsActivity;
 import ir.technocell.vakiljoo.VakilInfoForUser;
@@ -81,8 +100,10 @@ public class HqActivity extends AppCompatActivity
     private LayoutInflater inflater;
     private ImageView mDrawerIcon,mSearchImgBtn;
     private TextView mSearchTxtBtn;
+    private Typeface typeface;
     private static final String USERS_URL="http://vakiljoo.com/AppData/Users.php";
     private static final String QUESTIONS_URL="http://vakiljoo.com/AppData/Questions.php";
+    private static String USER_URL = "http://vakiljoo.com/AppData/Users.php";
 
     private TextView mDName,mDFamily,mDMoney;
     CircleImageView profile_image;
@@ -92,6 +113,12 @@ public class HqActivity extends AppCompatActivity
     ImageView mMohasebat,mMap,mChats,mTrhSoal,mHome,mProfile;
 
     HashMap<String, String> hashMap = new HashMap<>();
+
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    StringRequest stringRequest;
+    private MaterialDialog ldialog;
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -108,16 +135,8 @@ public class HqActivity extends AppCompatActivity
         Init();
         TopButtonsOperator();
         InitDrawerMenu();
-        try {
 
-
-            if (savedInstanceState.isEmpty() || savedInstanceState == null) {
-                InitDrawerOperations(GetDaMapData());
-            } else {
-                InitDrawerSaveLoadOperations(savedInstanceState.getBundle("mapData"));
-            }
-        }catch (Exception e){ e.printStackTrace(); }
-        InitDrawerOperations(GetDaMapData());
+        InitDrawerOperations();
         InitBottomMenu();
         BottomMenuOperations();
 
@@ -232,21 +251,8 @@ private void InitBottomMenu()
 
 
 
-    private HashMap GetDaMapData()
-    {
-        try {
 
-            Intent intent = getIntent();
-            hashMap  = (HashMap<String, String>) intent.getSerializableExtra("mapUser");
-            Log.v("HashMapTest", hashMap.get("U_Name_Show"));
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return hashMap;
-    }
-
-    private void InitDrawerOperations(HashMap hashMap)
+    private void InitDrawerOperations( )
     {
         try {
 
@@ -255,49 +261,170 @@ private void InitBottomMenu()
             mDFamily = view.findViewById(R.id.mDFamily);
             mDMoney = view.findViewById(R.id.mDMoney);
             profile_image=view.findViewById(R.id.profile_image);
-            mDName.setText(hashMap.get("U_Name_Show").toString());
-            mDFamily.setText(hashMap.get("U_Family_Show").toString());
-            mDMoney.setText(hashMap.get("U_Money").toString());
-            Picasso.get().load(hashMap.get("U_ProfilePic").toString()).into(profile_image);
+
+
+            mDName.setTypeface(typeface);
+            mDFamily.setTypeface(typeface);
+            mDMoney.setTypeface(typeface);
+
+            mDName.setText("نام : "+ sharedPreferences.getString("U_Name_Show","").toString());
+            mDFamily.setText("نام خانوادگی : "+sharedPreferences.getString("U_Family_Show","").toString());
+            mDMoney.setText("موجودی : "+sharedPreferences.getString("U_Money","").toString());
+            Picasso.get().load("http://"+sharedPreferences.getString("U_ProfilePic","").toString()).placeholder(R.drawable.vakile_profile).into(profile_image);
 
         }catch (Exception e)
         {
             e.printStackTrace();
         }
+        profile_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("Image Clicker->","yes");
+                CheckGalleryPremession();
+            }
+        });
 
     }
 
-    private void InitDrawerSaveLoadOperations(Bundle data)
+    private boolean CheckGalleryPremession()
     {
-         HashMap<String,String> hashMap=(HashMap<String, String>) data.getSerializable("mapData");
-        try {
+        final boolean[] res = {false};
+        final HqActivity reg = new HqActivity();
+        Dexter.withActivity(HqActivity.this)
+                .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override public void onPermissionGranted(PermissionGrantedResponse response) {
+                        res[0] =true;
+                        Intent intent = new Intent();
+                        intent.setType("image/jpeg");
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        startActivityForResult(Intent.createChooser(intent, "تصویر پروانه را انتخاب کنید"), 276);
+                    }
+                    @Override public void onPermissionDenied(PermissionDeniedResponse response) {
+                        CheckGalleryPremession();
+                        /* ... */}
+                    @TargetApi(Build.VERSION_CODES.M)
+                    @Override public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        Toasty.info(HqActivity.this,"برای تصویر پروانه دسترسی به فایل را مجاز کنید.",Toast.LENGTH_SHORT,true).show();
 
-            View view=navigationView.getHeaderView(0);
-            mDName = view.findViewById(R.id.mDName);
-            mDFamily = view.findViewById(R.id.mDFamily);
-            mDMoney = view.findViewById(R.id.mDMoney);
-            profile_image=view.findViewById(R.id.profile_image);
-            mDName.setText(hashMap.get("U_Name_Show").toString());
-            mDFamily.setText(hashMap.get("U_Family_Show").toString());
-            mDMoney.setText(hashMap.get("U_Money").toString());
-            Picasso.get().load(hashMap.get("U_ProfilePic").toString()).into(profile_image);
+                        reg.shouldShowRequestPermissionRationale(permission.getName());
+                        /* ... */}
+                }).check();
+        return res[0];
+    }
 
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 276) {
+            Toasty.info(HqActivity.this,"تصویر پروفایل انتخاب شد",Toast.LENGTH_SHORT,true).show();
+
+            if (data != null) {
+
+                new MaterialDialog.Builder(HqActivity.this).title("تعویض عکس").content("آیا از تعویض عکس خود اطمینان دارید؟")
+                        .positiveText("بله").negativeText("خیر")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                Uri filePath = data.getData();
+                                try {
+                                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                                    profile_image.setImageBitmap(bitmap);
+                                    ChangeUserImage(encodeTobase64(bitmap));
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+
+
+            }}}
+    public String encodeTobase64(Bitmap image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b,Base64.DEFAULT);
+
+        Log.e("LOOK", imageEncoded);
+        return imageEncoded;
+    }
+
+    private void ChangeUserImage(final String s)
+    {
+        ldialog = new MaterialDialog.Builder(HqActivity.this).title("لطفا صبر کنید").content("درحال اعتبارسنجی اطلاعات شما").progress(true, 0).titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf","vazir.ttf").show();
+
+        stringRequest=new StringRequest(Request.Method.POST,USER_URL , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Error:",response.toString());
+                if (response.equals("Technocell:Ok")) {
+                    Log.e("hhhhhh-->", response.toString());
+                    ldialog.dismiss();
+                    new MaterialDialog.Builder(HqActivity.this).title("ارسال موفق").content("ارسال با موفقیت انجام شد")
+                            .titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf", "vazir.ttf")
+                            .positiveText("تایید").onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+
+
+                } else {
+                    new MaterialDialog.Builder(HqActivity.this).title("ارسال ناموفق").content("ارسال با مشکل مواجه شد")
+                            .titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf", "vazir.ttf")
+                            .positiveText("تایید").onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("U_RqType", "changeUserPhoto");
+                map.put("U_ID",GetUserID().toString());
+                map.put("U_RqCode", generateRqCode(86639842, 95632547));
+                map.put("U_ProfilePic",s );
+                return map;
+            }
+        };
+        RQ.add(stringRequest);
 
     }
 
+    private String GetUserID() {
+        return sharedPreferences.getString("User_ID", "no");
+    }
 
 
 
     private void Init()
     {
+        sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
+        editor=sharedPreferences.edit();
         new VisualUtility(this).InitCalliGraphy();
         RQ=Volley.newRequestQueue(this);
         mTopSoalsBtn=findViewById(R.id.mTopSoalsBtn);
         mTopVakils=findViewById(R.id.mTopVakils);
+        typeface=Typeface.createFromAsset(getAssets(),"fonts/vazir.ttf");
         slider=findViewById(R.id.mSlider);
         slider.init(new PicassoImageLoadingService(this));
         slider.setAdapter(new MainSliderAdapter());
@@ -627,7 +754,7 @@ private void InitBottomMenu()
                     Log.e("This is Top man-->",topVakilsItem.getName());
 
                     Intent iGoToSoal=new Intent(getContext(),VakilInfoForUser.class);
-                    iGoToSoal.putExtra("QID",topVakilsItem.getVakilID());
+                    iGoToSoal.putExtra("VakilId",topVakilsItem.getVakilID());
                     startActivity(iGoToSoal);
 
                 }

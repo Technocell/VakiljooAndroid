@@ -2,8 +2,10 @@ package ir.technocell.vakiljoo;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -50,7 +52,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private RequestQueue RQ;
     private StringRequest request;
-
+    VisualUtility visualUtility;
     private HashMap<String,String> mapUser;
 
     private static String INFO_URL="http://vakiljoo.com/AppData/Users.php";
@@ -60,18 +62,25 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash_screen);
-        if(new VisualUtility(this).isInternetAvailable())
-        {
+        visualUtility=new VisualUtility(this);
+        if(isNetworkAvailable(this)) {
+
             intit();
             CheckUserExist();
         }else {
             Toasty.error(this,"اتصال به اینترنت برقرار نیست !",Toast.LENGTH_LONG).show();
-        }
+       }
     }
-
+    @SuppressLint("MissingPermission")
+    public boolean isNetworkAvailable(Context context) {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
     private boolean CheckUserExist()
     {
         String userId=GetUserID();
+        Log.e("Hello",GetUserID());
+
         if(userId.equals("no"))
         {
             Log.e("User-->","NotFound");
@@ -97,20 +106,27 @@ public class SplashScreen extends AppCompatActivity {
                     JSONArray jsonArray=new JSONArray(response.toString());
                     for(int c=0;c<jsonArray.length();c++)
                     {
+                        Log.e("getINFO-->",response.toString());
                         JSONObject object=jsonArray.getJSONObject(c);
-                        mapUser.put("User_ID",object.getString("U_ID"));
-                        mapUser.put("U_Name_Show",object.getString("U_Name"));
-                        mapUser.put("U_Family_Show",object.getString("U_Family"));
-                        mapUser.put("U_Telephone_Show",object.getString("U_Telephone"));
-                        mapUser.put("U_Money",object.getString("U_Money"));
-                        mapUser.put("U_Type",object.getString("U_Type"));
-                        mapUser.put("U_ProfilePic",object.getString("U_ProfilePic"));
+                        userDataEdit.putString("User_ID",object.getString("U_ID"));
+                        userDataEdit.putString("U_Name_Show",object.getString("U_Name"));
+                        userDataEdit.putString("U_Family_Show",object.getString("U_Family"));
+                        userDataEdit.putString("U_Telephone_Show",object.getString("U_Telephone"));
+                        userDataEdit.putString("U_Money",object.getString("U_Money"));
+                        userDataEdit.putString("U_Type",object.getString("U_Type"));
+                        userDataEdit.putString("U_ProfilePic",object.getString("U_ProfilePic"));
+                        userDataEdit.putString("U_isConfirmed",object.getString("U_isConfirmed"));
+                        userDataEdit.putString("User_ID",object.getString("U_ID"));
+                        userDataEdit.commit();
                     }
                     SetOnlineTime();
 
                 }catch (JSONException e)
                 {
                     e.printStackTrace();
+                    userDataEdit.putString("User_ID","no");
+                    userDataEdit.commit();
+                    CheckUserExist();
                 }
 
             }
@@ -137,13 +153,11 @@ public class SplashScreen extends AppCompatActivity {
         if(userType.equals("lawyer"))
         {
             userDataEdit.putInt("userType",1);
-           // Intent intent = new Intent(this, HqActivity.class); change HqActivity tovakil activity
-            //intent.putExtra("mapUser", mapUser);
-            //startActivity(intent);
+            Intent intent = new Intent(this, HqClient.class);
+            startActivity(intent);
         }else if(userType.equals("client")) {
             userDataEdit.putInt("userType",0);
             Intent intent = new Intent(this, HqActivity.class);
-            intent.putExtra("mapUser", mapUser);
             startActivity(intent);
         }
     }
@@ -153,6 +167,7 @@ public class SplashScreen extends AppCompatActivity {
     private String GetUserID()
     {
       return   userData.getString("User_ID","no");
+
     }
 
     private String generateRqCode(int min, int max) {
@@ -182,10 +197,12 @@ public class SplashScreen extends AppCompatActivity {
             @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(String response) {
+                Log.e("TIMERINFO-->",response.toString());
+
                 if(response.equals("Technocell:Ok"))
                 {
                     Log.e("OnlineTime-->","Setted");
-                    GoToNext(Objects.requireNonNull(mapUser.get("U_Type")));
+                    GoToNext(Objects.requireNonNull(userData.getString("U_Type","not")));
                 }else {
                     Log.e("OnlineTime-->","NotSetted");
                 }

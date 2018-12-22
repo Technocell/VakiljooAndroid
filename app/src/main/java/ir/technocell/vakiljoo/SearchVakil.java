@@ -93,7 +93,7 @@ public class SearchVakil extends AppCompatActivity {
                 Log.e("This is Top man-->",topVakilsItem.getName());
 
                 Intent iGoToSoal=new Intent(SearchVakil.this,VakilInfoForUser.class);
-                iGoToSoal.putExtra("QID",topVakilsItem.getVakilID());
+                iGoToSoal.putExtra("VakilId",topVakilsItem.getVakilID());
                 startActivity(iGoToSoal);
 
             }
@@ -135,6 +135,7 @@ public class SearchVakil extends AppCompatActivity {
 
     private void Search()
     {
+
         StringRequest topVakilRequest=new StringRequest(Request.Method.POST, USERS_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -152,6 +153,8 @@ public class SearchVakil extends AppCompatActivity {
                                 object.getString("U_AboutVakil"),
                                 object.getString("U_LastOnline"),
                                 object.getString("U_ID"));
+                        topVakilsList.clear();
+
                         topVakilsList.add(topVakilsItem);
                     }
                     mVakilsAdapter.notifyDataSetChanged();
@@ -174,7 +177,7 @@ public class SearchVakil extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("U_RqType","getUserInfo");
+                map.put("U_RqType","searchVakil");
                 map.put("U_Name",mSeachTextBar.getText().toString());
                 map.put("U_Family",mSeachTextBar.getText().toString());
                 map.put("U_RqCode",generateRqCode(86639842,95632547));

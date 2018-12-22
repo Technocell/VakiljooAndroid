@@ -1,8 +1,10 @@
 package ir.technocell.vakiljoo;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.WindowManager;
 
 import java.io.ByteArrayOutputStream;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
@@ -32,13 +35,12 @@ public class VisualUtility {
 
     public boolean isInternetAvailable() {
         try {
-            InetAddress ipAddr = InetAddress.getByName("google.com");
-            //You can replace it with your name
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            return false;
+            final InetAddress address = InetAddress.getByName("www.google.com");
+            return !address.equals("");
+        } catch (UnknownHostException e) {
+            // Log error
         }
+        return false;
     }
 
     public void InitCalliGraphy()
@@ -55,7 +57,7 @@ public class VisualUtility {
     public String encodeTobase64(Bitmap image) {
         Bitmap immagex=image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        immagex.compress(Bitmap.CompressFormat.PNG, 50, baos);
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b,Base64.DEFAULT);
 

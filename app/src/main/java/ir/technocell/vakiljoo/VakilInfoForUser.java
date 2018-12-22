@@ -50,13 +50,17 @@ public class VakilInfoForUser extends AppCompatActivity {
    public static CircleImageView profile_image;
     public static TextView mDName,mDFamily;
     private ViewPager mVakilInfoPager;
+    RequestQueue RQ;
     private PlaceholderFragment.SectionsPagerAdapter mSectionPageAdapter;
     Bundle bundle;
     private FancyButton mContactWays, mAboutMe;
     View view;
     ImageView mMohasebat,mMap,mChats,mTrhSoal,mHome,mProfile;
+    public static Context mContext;
 
-
+    public static String VakilID;
+    private StringRequest request;
+    private static String USER_URL = "http://vakiljoo.com/AppData/Users.php";
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -74,6 +78,7 @@ public class VakilInfoForUser extends AppCompatActivity {
         TopButtonsOperator();
         InitBottomMenu();
         BottomMenuOperations();
+        GetInfo(VakilID);
     }
 
     private void InitBottomMenu()
@@ -155,9 +160,59 @@ public class VakilInfoForUser extends AppCompatActivity {
         });
 
     }
+    private String generateRqCode(int min, int max) {
+        String finalCode;
+        Random r = new Random();
+        int requestCode = r.nextInt(max - min + 1) + min;
+        finalCode = String.valueOf(requestCode);
+        return finalCode;
+    }
 
+    public boolean GetInfo(final String id)
+    {
+
+        request = new StringRequest(Request.Method.POST, USER_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response of User-->",response.toString());
+                try{
+                    JSONArray jsonArray=new JSONArray(response.toString());
+                    for(int c=0;c<jsonArray.length();c++)
+                    {
+                        JSONObject object=jsonArray.getJSONObject(c);
+                            mDName.setText(object.getString("U_Name"));
+                             mDFamily.setText(object.getString("U_Family"));
+
+                          Picasso.get().load("http://"+object.getString("U_ProfilePic")).placeholder(R.drawable.vakile_profile).into(profile_image);
+                    }
+
+                }catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("U_RqType","getUserInfo");
+                map.put("U_RqCode",generateRqCode(86639842,95632547));
+                map.put("U_ID",id);
+                return map;
+            }
+        };
+        RQ.add(request);
+        return false;
+    }
     private void Init()
     {
+        RQ=Volley.newRequestQueue(this);
+        mContext=getApplicationContext();
         mContactWays = findViewById(R.id.mContactWays);
         mAboutMe = findViewById(R.id.mAboutMe);
         mTrhSoal=findViewById(R.id.mTrhSoal);
@@ -169,8 +224,7 @@ public class VakilInfoForUser extends AppCompatActivity {
         mVakilInfoPager.setAdapter(mSectionPageAdapter);
         bundle=getIntent().getExtras();
         try {
-
-            new PlaceholderFragment().GetInfo(bundle.getString("VakilId"));
+         VakilID=   bundle.getString("VakilId");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -183,7 +237,7 @@ public class VakilInfoForUser extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private RequestQueue RQ;
         private SharedPreferences userData;
-        private TextView mAboutMeText;
+        public TextView mAboutMeText;
         private FancyButton mSendAboutBtn,CallVakilBtn;
         private StringRequest request;
         private static String USER_URL = "http://vakiljoo.com/AppData/Users.php";
@@ -218,17 +272,21 @@ public class VakilInfoForUser extends AppCompatActivity {
         @Override
         public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                                  Bundle savedInstanceState) {
-            RQ = Volley.newRequestQueue(getContext());
             final View[] rootView = {null};
+            RQ=Volley.newRequestQueue(getContext());
+
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+
                 rootView[0] = inflater.inflate(R.layout.fragment_about_vakil_for_users, container, false);
                 InitAboutFrag(rootView[0]);
+                GetAbout(VakilID);
                 return rootView[0];
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
                 rootView[0] = inflater.inflate(R.layout.fragment_contact_vakil_for_users, container, false);
                 InitVakilContact(rootView[0]);
-
+                GetInfo(VakilID);
                 return rootView[0];
+
             }
 
             return rootView[0];
@@ -236,6 +294,8 @@ public class VakilInfoForUser extends AppCompatActivity {
 
         private void InitVakilContact(View rootView)
         {
+            Log.e("Starter-->","Vakil");
+
             mHMFrom=rootView.findViewById(R.id.mHMFrom);
             mHMTo=rootView.findViewById(R.id.mHMTo);
             mHAFrom=rootView.findViewById(R.id.mHAFrom);
@@ -261,13 +321,53 @@ public class VakilInfoForUser extends AppCompatActivity {
         }
 
 
-        private String GetUserID() {
-            return userData.getString("User_ID", "no");
-        }
 
         private void InitAboutFrag(View rootView) {
             mAboutMeText = rootView.findViewById(R.id.mAboutMeText);
+            Log.e("Starter-->","about");
         }
+
+
+        public boolean GetAbout(final String id)
+        {
+
+            request = new StringRequest(Request.Method.POST, USER_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.e("Response of User-->",response.toString());
+                    try{
+                        JSONArray jsonArray=new JSONArray(response.toString());
+                        for(int c=0;c<jsonArray.length();c++)
+                        {
+                            JSONObject object=jsonArray.getJSONObject(c);
+                            mAboutMeText.setText(object.getString("U_AboutVakil"));
+                          //  SetHftehDays(object.getString("U_WeekDay").trim());
+                        }
+
+                    }catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String> map = new HashMap<String,String>();
+                    map.put("U_RqType","getUserInfo");
+                    map.put("U_RqCode",generateRqCode(86639842,95632547));
+                    map.put("U_ID",id);
+                    return map;
+                }
+            };
+            RQ.add(request);
+            return false;
+        }
+
 
         public boolean GetInfo(final String id)
         {
@@ -275,14 +375,14 @@ public class VakilInfoForUser extends AppCompatActivity {
             request = new StringRequest(Request.Method.POST, USER_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-
+                        Log.e("Response of User-->",response.toString());
                     try{
                         JSONArray jsonArray=new JSONArray(response.toString());
                         for(int c=0;c<jsonArray.length();c++)
                         {
                             JSONObject object=jsonArray.getJSONObject(c);
-                            mDName.setText(object.getString("U_Name"));
-                           mDFamily.setText(object.getString("U_Family"));
+                        //    mDName.setText(object.getString("U_Name"));
+                       //     mDFamily.setText(object.getString("U_Family"));
                             Telephone=object.getString("U_Telephone");
 
                             mHMFrom.setText(object.getString("U_HMorning"));
@@ -293,8 +393,8 @@ public class VakilInfoForUser extends AppCompatActivity {
                             mCMTo.setText(object.getString("U_HMorningE"));
                             mCAFrom.setText(object.getString("U_Tafternoon"));
                             mCATo.setText(object.getString("U_TafternoonE"));
-                            Picasso.get().load(object.getString("U_ProfilePic")).placeholder(R.drawable.vakile_profile).into(profile_image);
-                            mAboutMeText.setText(object.getString("U_AboutVakil"));
+                          //  Picasso.get().load("http://"+object.getString("U_ProfilePic")).placeholder(R.drawable.vakile_profile).into(profile_image);
+//                            mAboutMeText.setText(object.getString("U_AboutVakil"));
                             SetHftehDays(object.getString("U_WeekDay").trim());
                         }
 

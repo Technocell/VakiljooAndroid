@@ -256,16 +256,16 @@
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
+        <ImageView
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/calendar"/>
+
+
         <LinearLayout
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-
-
-        <LinearLayout
-            android:layout_weight="1"
             android:layout_marginLeft="14dp"
             android:layout_gravity="left"
     android:orientation="vertical"
@@ -367,15 +367,7 @@
     </LinearLayout>
 
 </LinearLayout>
-            <ImageView
-                android:layout_weight="1"
-                android:layout_gravity="right|center_vertical"
-                android:layout_centerVertical="true"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/calendar"/>
 
-        </LinearLayout>
 
 
 

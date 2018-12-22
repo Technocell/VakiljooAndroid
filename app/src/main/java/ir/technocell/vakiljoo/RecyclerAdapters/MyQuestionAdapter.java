@@ -38,7 +38,7 @@ public class MyQuestionAdapter  extends  RecyclerView.Adapter<MyQuestionAdapter.
         myViewHolder.mText.setText(mySoalsItem.getText());
         myViewHolder.mGroup.setText(mySoalsItem.getGroup());
         myViewHolder.mDate.setText(mySoalsItem.getDate());
-        Picasso.get().load(mySoalsItem.getImageUrl().toString()).into(myViewHolder.imageView);
+        Picasso.get().load("http://"+mySoalsItem.getImageUrl().toString()).placeholder(R.drawable.vakile_profile).into(myViewHolder.imageView);
 
 
     }

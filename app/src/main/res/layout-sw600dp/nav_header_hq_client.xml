@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="نام :"
             android:textColor="@color/white"
-            android:textSize="19sp"
+            android:textSize="20sp"
             tools:ignore="MissingPrefix" />
         <TextView
             android:layout_marginTop="5dp"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:text="نام خانوادگی :"
             android:textColor="@color/white"
-            android:textSize="19sp"
+            android:textSize="20sp"
             tools:ignore="MissingPrefix" />
         <TextView
             android:id="@+id/mDMoney"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text="مبلغ :"
             android:textColor="@color/white"
-            android:textSize="19sp"
+            android:textSize="20sp"
             tools:ignore="MissingPrefix" />
         <TextView
             android:id="@+id/mDProfileState"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="وضعیت پروفایل :"
             android:textColor="@color/white"
-            android:textSize="19sp"
+            android:textSize="20sp"
             tools:ignore="MissingPrefix" />
 
 

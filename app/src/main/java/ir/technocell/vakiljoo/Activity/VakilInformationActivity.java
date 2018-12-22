@@ -5,6 +5,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -17,6 +19,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +45,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +73,11 @@ public class VakilInformationActivity extends AppCompatActivity {
     VisualUtility visualUtility;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private MaterialDialog ldialog;
+    StringRequest stringRequest;
+    RequestQueue RQ;
+    private static String USER_URL = "http://vakiljoo.com/AppData/Users.php";
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -86,33 +95,21 @@ public class VakilInformationActivity extends AppCompatActivity {
         SetupHeader();
         InitBottomMenu();
         BottomMenuOperations();
-        InitDrawerOperations(GetDaMapData());
+        InitDrawerOperations();
 
     }
 
 
-    private HashMap GetDaMapData()
-    {
-        try {
-            Intent intent = getIntent();
-            hashMap  = (HashMap<String, String>) intent.getSerializableExtra("mapUser");
-            Log.v("HashMapTest", hashMap.get("U_Name_Show"));
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return hashMap;
-    }
 
-    private void InitDrawerOperations(HashMap hashMap)
+    private void InitDrawerOperations()
     {
         try {
 
             mDName = findViewById(R.id.mDName);
             mDFamily = findViewById(R.id.mDFamily);
-            mDName.setText(hashMap.get("U_Name_Show").toString());
-            mDFamily.setText(hashMap.get("U_Family_Show").toString());
-            Picasso.get().load(hashMap.get("U_ProfilePic").toString()).into(profile_image);
+            mDName.setText(sharedPreferences.getString("U_Name_Show",null).toString());
+            mDFamily.setText(sharedPreferences.getString("U_Family_Show",null).toString());
+            Picasso.get().load("http://"+sharedPreferences.getString("U_ProfilePic","not").toString()).placeholder(R.drawable.vakile_profile).into(profile_image);
 
          }catch (Exception e)
         {
@@ -170,10 +167,66 @@ public class VakilInformationActivity extends AppCompatActivity {
             }
         });
     }
+    private String GetUserID() {
+        return sharedPreferences.getString("User_ID", "no");
+    }
 
+
+    private void ChangeUserImage(final String s)
+    {            ldialog = new MaterialDialog.Builder(VakilInformationActivity.this).title("لطفا صبر کنید").content("درحال اعتبارسنجی اطلاعات شما").progress(true, 0).titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf","vazir.ttf").show();
+
+        stringRequest=new StringRequest(Request.Method.POST,USER_URL , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Error:",response.toString());
+                if (response.equals("Technocell:Ok")) {
+                    Log.e("hhhhhh-->", response.toString());
+                    ldialog.dismiss();
+                    new MaterialDialog.Builder(VakilInformationActivity.this).title("ارسال موفق").content("ارسال با موفقیت انجام شد")
+                            .titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf", "vazir.ttf")
+                            .positiveText("تایید").onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+
+
+                } else {
+                    new MaterialDialog.Builder(VakilInformationActivity.this).title("ارسال ناموفق").content("ارسال با مشکل مواجه شد")
+                            .titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf", "vazir.ttf")
+                            .positiveText("تایید").onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("U_RqType", "changeUserPhoto");
+                map.put("U_ID",GetUserID().toString());
+                map.put("U_RqCode", generateRqCode(86639842, 95632547));
+                map.put("U_ProfilePic",s );
+                return map;
+            }
+        };
+        RQ.add(stringRequest);
+
+    }
 
     private void Init() {
-        new VisualUtility(this).InitCalliGraphy();
+        visualUtility=new VisualUtility(this);
+        visualUtility.InitCalliGraphy();
         profile_image=findViewById(R.id.profile_image);
 
         mContactWays = findViewById(R.id.mContactWays);
@@ -186,31 +239,59 @@ public class VakilInformationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setType("image/*");
+                intent.setType("image/jpeg");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "تصویر پروانه را انتخاب کنید"), 276);
+                startActivityForResult(Intent.createChooser(intent, "تصویر پروفایل با فرمت jpeg را انتخاب کنید"), 276);
             }
         });
         sharedPreferences=PreferenceManager.getDefaultSharedPreferences(VakilInformationActivity.this);
         editor=sharedPreferences.edit();
+        RQ=Volley.newRequestQueue(this);
     }
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == 276) {
+            Toasty.info(VakilInformationActivity.this,"تصویر پروفایل انتخاب شد",Toast.LENGTH_SHORT,true).show();
+
             if (data != null) {
-                try {
-                  editor.putString("userImage",visualUtility.encodeTobase64(MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData())));
-                  editor.commit();
-                    profile_image.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData()));
-                    Toasty.info(VakilInformationActivity.this,"تصویر پروفایل انتخاب شد",Toast.LENGTH_SHORT,true).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+                    new MaterialDialog.Builder(VakilInformationActivity.this).title("تعویض عکس").content("آیا از تعویض عکس خود اطمینان دارید؟")
+                            .positiveText("بله").negativeText("خیر")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    Uri filePath = data.getData();
+                                    try {
+                                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                                        profile_image.setImageBitmap(bitmap);
+                                        ChangeUserImage(encodeTobase64(bitmap));
+                                    }catch (Exception e){ e.printStackTrace(); }
+                                }
+                            }).onNegative(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+
+
             }
         }
 
 
+    }
+    public String encodeTobase64(Bitmap image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b,Base64.DEFAULT);
+
+        Log.e("LOOK", imageEncoded);
+        return imageEncoded;
     }
 
     private void TopButtonsOperator() {
@@ -265,6 +346,8 @@ public class VakilInformationActivity extends AppCompatActivity {
         String[] WeekDays=new String[8];
         SharedPreferences sharedPreferences;
         SharedPreferences.Editor editor;
+        private MaterialDialog ldialog;
+
 
         public PlaceholderFragment() {
 
@@ -284,6 +367,10 @@ public class VakilInformationActivity extends AppCompatActivity {
         public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                                  Bundle savedInstanceState) {
             RQ = Volley.newRequestQueue(getContext());
+            sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getContext());
+            editor=sharedPreferences.edit();
+
+
             final View[] rootView = {null};
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
                 rootView[0] = inflater.inflate(R.layout.layout_fragment_a, container, false);
@@ -319,10 +406,7 @@ public class VakilInformationActivity extends AppCompatActivity {
             mPanjShanbeh=rootView.findViewById(R.id.mPanjShanbeh);
             mJomeh=rootView.findViewById(R.id.mJomeh);
             mSendContactBtn=rootView.findViewById(R.id.mSendContactBtn);
-            sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getContext());
-            editor=sharedPreferences.edit();
-            editor.remove("userImage");
-            editor.commit();
+
 
             mSendContactBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -611,12 +695,14 @@ public class VakilInformationActivity extends AppCompatActivity {
 
         private void SendVakilTimes()
         {
+            ldialog = new MaterialDialog.Builder(getContext()).title("لطفا صبر کنید").content("درحال اعتبارسنجی اطلاعات شما").progress(true, 0).titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf","vazir.ttf").show();
+
             request=new StringRequest(Request.Method.POST,USER_URL , new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     if (response.equals("Technocell:Ok")) {
-                        Log.e("OnlineTime-->", "Setted");
-
+                        Log.e("hhhhhh-->", response.toString());
+                        ldialog.dismiss();
                         new MaterialDialog.Builder(getContext()).title("ارسال موفق").content("ارسال با موفقیت انجام شد")
                                 .titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf", "vazir.ttf")
                                 .positiveText("تایید").onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -649,21 +735,20 @@ public class VakilInformationActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("U_RqType", "setVakilTime");
+                    map.put("U_ID",GetUserID().toString());
                     map.put("U_RqCode", generateRqCode(86639842, 95632547));
                     map.put("U_WeekDay", WeekDays[0]+","+WeekDays[1]+","+WeekDays[2]+","+
                             WeekDays[3]+","+WeekDays[4]+","+WeekDays[5]+","+WeekDays[6]+","+WeekDays[7]);
-
                     map.put("U_HMorning",mHMFrom.getText().toString());
                     map.put("U_HAfternoon", mHAFrom.getText().toString());
                     map.put("U_TMorning", mCMFrom.getText().toString());
                     map.put("U_Tafternoon", mCAFrom.getText().toString());
-
+                    Log.e("timer",sharedPreferences.getString("image64","not"));
                     map.put("U_HMorningE", mHMTo.getText().toString());
                     map.put("HAfternoonE", mHATo.getText().toString());
                     map.put("U_TMorningE", mCMTo.getText().toString());
                     map.put("U_TafternoonE", mCATo.getText().toString());
-
-                    map.put("U_ProfilePic", sharedPreferences.getString("userImage","not"));
+                    map.put("U_ProfilePic","not");
 
                     return map;
                 }
@@ -676,13 +761,16 @@ public class VakilInformationActivity extends AppCompatActivity {
 
 
         private void SendInfoVakil() {
+            ldialog = new MaterialDialog.Builder(getContext()).title("لطفا صبر کنید").content("درحال اعتبارسنجی اطلاعات شما").progress(true, 0).titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf","vazir.ttf").show();
+
             request = new StringRequest(Request.Method.POST, USER_URL, new Response.Listener<String>() {
                 @TargetApi(Build.VERSION_CODES.KITKAT)
                 @Override
                 public void onResponse(String response) {
+                    ldialog.dismiss();
+
                     if (response.equals("Technocell:Ok")) {
                         Log.e("OnlineTime-->", "Setted");
-
                         new MaterialDialog.Builder(getContext()).title("ارسال موفق").content("ارسال با موفقیت انجام شد")
                                 .titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf", "vazir.ttf")
                                 .positiveText("تایید").onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -724,7 +812,7 @@ public class VakilInformationActivity extends AppCompatActivity {
             RQ.add(request);
         }
         private String GetUserID() {
-            return userData.getString("User_ID", "no");
+            return sharedPreferences.getString("User_ID", "no");
         }
 
         private void InitAboutFrag(View rootView) {

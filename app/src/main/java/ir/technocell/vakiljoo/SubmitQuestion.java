@@ -61,6 +61,7 @@ public class SubmitQuestion extends AppCompatActivity {
     ImageView mMohasebat,mMap,mChats,mTrhSoal,mHome,mProfile;
 
 
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
@@ -70,8 +71,8 @@ public class SubmitQuestion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_question);
-        GetDaMapData();
         Init();
+
         SetupHeader();
         SetCounterText();
         InitBottomMenu();
@@ -232,8 +233,8 @@ public class SubmitQuestion extends AppCompatActivity {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("U_ID", GetUserID());
                 map.put("Q_RqType", "AddQuestion");
-                map.put("Q_UName ", hashMap.get("U_Name_Show"));
-                map.put("Q_UFamily ", hashMap.get("U_Family_Show"));
+                map.put("Q_UName ", userData.getString("U_Name_Show",""));
+                map.put("Q_UFamily ", userData.getString("U_Family_Show",""));
                 map.put("Q_Title",  mQuestionTitle.getText().toString());
                 map.put("Q_Question", mQuestionText.getText().toString());
                 map.put("Q_Group", mQGroup.getSelectedItem().toString());
@@ -265,19 +266,6 @@ public class SubmitQuestion extends AppCompatActivity {
         return res[0];
     }
 
-    private HashMap GetDaMapData()
-    {
-        try {
-
-            Intent intent = getIntent();
-            hashMap  = (HashMap<String, String>) intent.getSerializableExtra("mapUser");
-            Log.v("HashMapTest", hashMap.get("U_Name_Show"));
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return hashMap;
-    }
 
     public static String generateRqCode(int min, int max) {
         String finalCode;

@@ -49,7 +49,7 @@ public class TopSoalsAdapter extends RecyclerView.Adapter<TopSoalsAdapter.MyView
         if(isPublicOperation(tops.getIsPublic()))
         {
             myViewHolder.mSNameFamily.setText(tops.getNameoFamily());
-            Picasso.get().load("http://vakiljoo.com/AppData/Core/ProfilePics/"+tops.getUserId()+".png").placeholder(R.drawable.vakile_profile).into(myViewHolder.mClientImage, new Callback() {
+            Picasso.get().load("http://vakiljoo.com/AppData/Core/ProfilePics/"+tops.getUserId()+".jpeg").placeholder(R.drawable.vakile_profile).into(myViewHolder.mClientImage, new Callback() {
                 @Override
                 public void onSuccess() {
 
@@ -57,13 +57,13 @@ public class TopSoalsAdapter extends RecyclerView.Adapter<TopSoalsAdapter.MyView
 
                 @Override
                 public void onError(Exception e) {
-                   // Picasso.get().load("android.resource://ir.technocell.vakiljoo/drawable/vakile_profile.png").into(myViewHolder.mClientImage);
+                   // Picasso.get().load("android.resource://ir.technocell.vakiljoo/drawable/vakile_profile.jpeg").into(myViewHolder.mClientImage);
 
                 }
             });
         }else {
             myViewHolder.mSNameFamily.setText("ناشناس");
-            Picasso.get().load("android.resource://ir.technocell.vakiljoo/drawable/vakile_profile.png").placeholder(R.drawable.vakile_profile).into(myViewHolder.mClientImage);
+            Picasso.get().load("android.resource://ir.technocell.vakiljoo/drawable/vakile_profile.jpeg").placeholder(R.drawable.vakile_profile).into(myViewHolder.mClientImage);
         }
 
 

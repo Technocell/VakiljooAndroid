@@ -68,6 +68,7 @@ import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+import ir.technocell.vakiljoo.Activity.HqActivity;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class Register extends AppCompatActivity {
@@ -106,7 +107,7 @@ public class Register extends AppCompatActivity {
        mViewPager.setOnTouchListener(new View.OnTouchListener() {
            @Override
            public boolean onTouch(View view, MotionEvent motionEvent) {
-               return false;
+               return true;
            }
        });
 
@@ -372,6 +373,8 @@ public class Register extends AppCompatActivity {
             StringRequest moreDataRequest=new StringRequest(Request.Method.POST, USER_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+                    Log.e("hauououou",response.toString());
+
                     if(response.equals("Technocell:UserUpdated"))
                     {
                         Log.e("hauououou",response.toString());
@@ -383,7 +386,8 @@ public class Register extends AppCompatActivity {
                                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                                     @Override
                                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                        //go to Hq
+                                       Intent intent=new Intent(getContext(),SplashScreen.class);
+                                       startActivity(intent);
                                     }
                                 }).show();
 
@@ -392,7 +396,7 @@ public class Register extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    error.printStackTrace();
                 }
             }){
                 @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -523,9 +527,19 @@ public class Register extends AppCompatActivity {
                         }else {
                             Log.e("lkjhlkj","12313");
 
-                            //go to hq
+                            Intent intent=new Intent(getContext(),SplashScreen.class);
+                            startActivity(intent);
                         }
 
+                    }else if(response.equals("Technocell:UserExists"))
+                    {
+                        new MaterialDialog.Builder(getContext()).title("ثبت نام کاربر").content("کاربری با این شماره موجود است.")
+                                .positiveText("تایید").onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@android.support.annotation.NonNull MaterialDialog dialog, @android.support.annotation.NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
                     }
                 }
             }, new Response.ErrorListener() {

@@ -2,9 +2,11 @@ package ir.technocell.vakiljoo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +18,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +28,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
@@ -34,6 +38,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import ir.technocell.vakiljoo.Activity.MatnSoal;
@@ -74,9 +80,14 @@ public class HqClient extends AppCompatActivity
     ImageView mMohasebat, mMap, mChats, mTrhSoal, mHome, mProfile;
     PopupMenu popupMenu;
     MaterialDialog dialog;
+    NavigationView navigationView;
 
+    private TextView mDName,mDFamily,mDMoney,mDProfileState;
 
-
+    private Typeface typeface;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    CircleImageView profile_image;
 
 
     @Override
@@ -96,7 +107,56 @@ public class HqClient extends AppCompatActivity
         GetInfo();
         InitBottomMenu();
         BottomMenuOperations();
+        InitDrawerOperations();
+
     }
+
+    private void InitDrawerOperations()
+    {
+        try {
+
+            View view=navigationView.getHeaderView(0);
+            mDName = view.findViewById(R.id.mDName);
+            mDFamily = view.findViewById(R.id.mDFamily);
+            mDMoney = view.findViewById(R.id.mDMoney);
+            mDProfileState=view.findViewById(R.id.mDProfileState);
+
+            mDName.setTypeface(typeface);
+            mDFamily.setTypeface(typeface);
+            mDMoney.setTypeface(typeface);
+            mDProfileState.setTypeface(typeface);
+
+
+            profile_image=view.findViewById(R.id.profile_image);
+
+
+            mDName.setText("نام : "+ sharedPreferences.getString("U_Name_Show","").toString());
+            mDFamily.setText("نام خانوادگی : "+sharedPreferences.getString("U_Family_Show","").toString());
+
+            if(sharedPreferences.getString("U_isConfirmed","").equals("true"))
+            {
+                mDProfileState.setText("پروفایل : تایید شده");
+            }else {
+                mDProfileState.setText("پروفایل : تایید نشده");
+            }
+            if(TextUtils.isEmpty(sharedPreferences.getString("U_Money","").toString()))
+            {
+                mDMoney.setText("موجودی : 00000");
+            }else {
+                mDMoney.setText("موجودی : "+sharedPreferences.getString("U_Money","").toString());
+            }
+
+            Picasso.get().load("http://"+sharedPreferences.getString("U_ProfilePic","").toString()).placeholder(R.drawable.vakile_profile).into(profile_image);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
 
     private void BottomMenuOperations() {
         mHome.setOnClickListener(new View.OnClickListener() {
@@ -130,11 +190,14 @@ public class HqClient extends AppCompatActivity
     }
 
     private void init() {
+        sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
+        editor=sharedPreferences.edit();
         new VisualUtility(this).InitCalliGraphy();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mFilter = findViewById(R.id.mFilter);
-
+        mFilter.setTypeface(typeface);
+        typeface=Typeface.createFromAsset(getAssets(),"fonts/vazir.ttf");
         popupMenu = new PopupMenu(HqClient.this, mFilter);
         popupMenu.getMenuInflater().inflate(R.menu.hq_client, popupMenu.getMenu());
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -143,12 +206,12 @@ public class HqClient extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         toggle.setDrawerIndicatorEnabled(false);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         recyclerviewQuestion = findViewById(R.id.mRecyclerview);
         Rq = Volley.newRequestQueue(this);
         mDrawerIcon = findViewById(R.id.mDrawerIcon);
-        OpenCustopPopUpMenu();
+        FilterMenu();
         drawer.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View view, float v) {
@@ -215,7 +278,45 @@ public class HqClient extends AppCompatActivity
         }));
     }
 
-    private void OpenCustopPopUpMenu() {
+    private void FilterMenu()
+    {
+        final String[] items=new String[6];
+        items[0]="کیفری";
+        items[1]="حقوقی";
+        items[2]="خانواده";
+        items[3]="ثبت احوال";
+        items[4]="امور مهاجرت";
+        items[5]="همه سوالات";
+
+
+        mFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MaterialDialog.Builder(HqClient.this)
+                        .items(items).itemsCallbackSingleChoice(0, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+
+                        if(which==5)
+                        {
+                            GetInfo();
+                        }else {
+
+                            GetCustomQuestion(items[which].toString().trim());
+                        }
+                        return false;
+                    }
+                }).title("فیلتر سوالات").positiveText("تایید").onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+            }
+        });
+    }
+
+   /* private void OpenCustopPopUpMenu() {
         mFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -246,20 +347,22 @@ public class HqClient extends AppCompatActivity
             }
         });
     }
-
+*/
 
     private void GetCustomQuestion(final String type) {
+        myQuestionModelList.clear();
+        Log.e("ItemSelected-->",type.toString());
         dialog = new MaterialDialog.Builder(HqClient.this).title("لطفا صبر کنید").content("درحال آنالیز اطلاعات").progress(true, 0).titleGravity(GravityEnum.END).contentGravity(GravityEnum.END).typeface("vazir.ttf", "vazir.ttf").show();
-
         QuestionsReauest = new StringRequest(Request.Method.POST, JSON_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.e("Response of Filter-->",response.toString());
                 dialog.dismiss();
                 try {
                     JSONArray jsonArray = new JSONArray(response.toString());
                     for (int c = 0; c < jsonArray.length(); c++) {
                         JSONObject object = jsonArray.getJSONObject(c);
-                        String picPath = "http://vakiljoo.com/AppData/Core/ProfilePics/" + object.getString("Q_UID") + ".png";
+                        String picPath = "http://vakiljoo.com/AppData/Core/ProfilePics/" + object.getString("Q_UID") + ".jpeg";
                         MyQuestionModel myQuestionModel = new MyQuestionModel(picPath, object.getString("Q_Title"), object.getString("Q_Question"),
                                 object.getString("Q_Date"),
                                 object.getString("Q_Group"), object.getString("Q_UName") + " " + object.getString("Q_UFamily"), object.getString("Q_ID"));
@@ -282,7 +385,7 @@ public class HqClient extends AppCompatActivity
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("Q_RqType", "GetCustomQuestion");
                 map.put("Q_RqCode", generateRqCode(54639842, 76632547));
-                map.put("Q_CusType", type);
+                map.put("Q_CusType", type.trim());
 
                 return map;
             }
@@ -291,14 +394,16 @@ public class HqClient extends AppCompatActivity
     }
 
     private void GetInfo() {
+        myQuestionModelList.clear();
         QuestionsReauest = new StringRequest(Request.Method.POST, JSON_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.e("qqqqq",response.toString());
                 try {
                     JSONArray jsonArray = new JSONArray(response.toString());
                     for (int c = 0; c < jsonArray.length(); c++) {
                         JSONObject object = jsonArray.getJSONObject(c);
-                        String picPath = "http://vakiljoo.com/AppData/Core/ProfilePics/" + object.getString("Q_UID") + ".png";
+                        String picPath = "http://vakiljoo.com/AppData/Core/ProfilePics/" + object.getString("Q_UID") + ".jpeg";
                         MyQuestionModel myQuestionModel = new MyQuestionModel(picPath, object.getString("Q_Title"), object.getString("Q_Question"),
                                 object.getString("Q_Date"),
                                 object.getString("Q_Group"), object.getString("Q_UName") + " " + object.getString("Q_UFamily"), object.getString("Q_ID"));

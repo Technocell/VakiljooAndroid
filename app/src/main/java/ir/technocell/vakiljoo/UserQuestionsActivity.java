@@ -133,8 +133,8 @@ public class UserQuestionsActivity extends AppCompatActivity {
                     {
                         JSONObject object=jsonArray.getJSONObject(c);
                         MySoalsItem mySoalsItem=new MySoalsItem(object.getString("Q_Title")
-                                ,object.getString("Q_Question"),object.getString("Q_Group"),object.getString("Q_Group"),
-                                "http://vakiljoo.com/AppData/Core/ProfilePics/"+GetUserID()+".png");
+                                ,object.getString("Q_Question"),object.getString("Q_Group"),object.getString("Q_Date"),
+                                "http://vakiljoo.com/AppData/Core/ProfilePics/"+GetUserID()+".jpeg");
                         mySoalsItems.add(mySoalsItem);
                     }
                     myQuestionAdapter.notifyDataSetChanged();
