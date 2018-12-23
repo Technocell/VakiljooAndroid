@@ -106,7 +106,7 @@
         fancy:fb_defaultColor="@color/colorPrimary"
         fancy:fb_radius="10dp"
         fancy:fb_text="ورود به چت خصوصی برای پاسخ"
-        fancy:fb_textSize="23sp"
+        fancy:fb_textSize="20sp"
         android:id="@+id/mGoToChat"
         fancy:fb_textFont="fonts/vazir.ttf"
         android:layout_width="match_parent"

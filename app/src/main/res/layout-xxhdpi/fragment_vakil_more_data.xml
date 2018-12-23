@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    tools:context=".VakilMoreData"
+    android:orientation="vertical">
+
+
+    <EditText
+
+        android:textSize="18dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/mPavanehNumber"
+        android:textColor="@color/colorPrimary"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="شماره پروانه"
+        android:inputType="text"
+        android:paddingRight="10dp"
+        tools:ignore="MissingPrefix" />
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/mPrvanehImage"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/mVerifyCode"
+        android:layout_centerHorizontal="true"
+        fancy:fb_textFont="fonts/vazir.ttf"
+
+        fancy:fb_defaultColor="@color/orange"
+        fancy:fb_radius="10dp"
+        fancy:fb_text="تصویر پروانه وکالت"
+        fancy:fb_textSize="25sp" />
+
+    <EditText
+        android:textSize="18dp"
+
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/mTahselat"
+        android:textColor="@color/colorPrimary"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="تحصیلات"
+        android:inputType="text"
+        android:paddingRight="10dp"
+        tools:ignore="MissingPrefix" />
+    <EditText
+        android:textSize="18dp"
+
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/mTakhasos"
+        android:textColor="@color/colorPrimary"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="تخصص"
+        android:inputType="text"
+        android:paddingRight="10dp"
+        tools:ignore="MissingPrefix" />
+    <EditText
+        android:textSize="18dp"
+
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/mTeleSabet"
+        android:textColor="@color/colorPrimary"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="تلفن ثابت"
+        android:inputType="number"
+        android:paddingRight="10dp"
+        tools:ignore="MissingPrefix" />
+
+    <RadioGroup
+        android:gravity="center"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+
+            android:id="@+id/mVokala"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:text="کانون وکلا"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:textSize="18dp"
+            android:id="@+id/mMoshaveran"
+            android:text="کانون مشاوران"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+
+
+
+    <EditText
+        android:textSize="18dp"
+        android:lines="5"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/mAddress"
+        android:textColor="@color/colorPrimary"
+        fontPath="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="آدرس دقیق"
+        android:inputType="textMultiLine"
+        android:paddingRight="10dp"
+        tools:ignore="MissingPrefix" />
+
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        fancy:fb_textFont="fonts/vazir.ttf"
+
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/mSendMoreDataBtn"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/mVerifyCode"
+        android:layout_centerHorizontal="true"
+
+        fancy:fb_defaultColor="@color/orange"
+        fancy:fb_radius="10dp"
+        fancy:fb_text="ثبت و ارسال برای تایید"
+        fancy:fb_textSize="25sp" />
+
+
+
+</LinearLayout>

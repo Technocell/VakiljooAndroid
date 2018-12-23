@@ -14,13 +14,13 @@
 
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mMySoalsRecycler"
         android:layout_weight="4"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 
@@ -38,7 +38,7 @@
         fancy:fb_defaultColor="@color/colorPrimary"
         fancy:fb_radius="10dp"
         fancy:fb_text="ثبت سوال جدید"
-        fancy:fb_textSize="25sp" />
+        fancy:fb_textSize="20sp" />
 
     <include
         android:layout_weight="1" layout="@layout/bottom_layout_client"

@@ -32,13 +32,13 @@
                 android:layout_height="wrap_content"
                 android:text="تحصیلات"
                 android:textColor="@color/colorPrimary"
-                android:textSize="27sp"
+                android:textSize="22sp"
                 tools:ignore="MissingPrefix" />
 
 <ImageView
     android:id="@+id/mDIcon"
-    android:layout_width="66dp"
-    android:layout_height="66dp"
+    android:layout_width="45dp"
+    android:layout_height="45dp"
     android:src="@drawable/d_0"/>
 
 

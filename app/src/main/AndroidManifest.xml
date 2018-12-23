@@ -7,8 +7,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <supports-screens android:anyDensity="true" android:largeScreens="true" android:smallScreens="true" android:normalScreens="true" android:xlargeScreens="true"/>
 
     <application
+
 
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,6 +21,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             android:name=".Activity.HqActivity"
             android:label="@string/app_name"
@@ -55,7 +58,9 @@
 
             android:windowSoftInputMode="adjustPan"
             android:name=".Activity.VakilInformationActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" >
+
+        </activity>
         <activity             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" android:name=".UserQuestionsActivity" />
         <activity             android:screenOrientation="portrait"
@@ -71,9 +76,18 @@
 
 
         </activity>
-        <activity  android:windowSoftInputMode="adjustPan" android:name=".VakilInfoForUser"></activity>
-        <activity  android:windowSoftInputMode="adjustPan" android:name=".Activity.MatnSoal" />
-        <activity  android:windowSoftInputMode="adjustPan" android:name=".SearchVakil"></activity>
+        <activity             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" android:name=".VakilInfoForUser">
+
+        </activity>
+        <activity             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" android:name=".Activity.MatnSoal" >
+
+        </activity>
+        <activity             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" android:name=".SearchVakil">
+
+        </activity>
     </application>
 
 </manifest>

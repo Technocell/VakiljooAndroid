@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:id="@+id/mSubmitQuestionMother"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+
+            android:padding="20dp"
+            fontPath="fonts/vazir.ttf"
+            tools:ignore="MissingPrefix"
+            android:layout_margin="10dp"
+            android:id="@+id/mGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:spinnerDirection="rtl"
+            app:spinnerHint="یک مورد انتخاب شود" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            
+<TextView
+    fontPath="fonts/vazir.ttf"
+    tools:ignore="MissingPrefix"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/colorAccent"
+    android:layout_gravity="right"
+    android:layout_margin="10dp"
+    android:textSize="19sp"
+    android:text="عنوان سوال"/>
+        
+        <EditText
+            android:id="@+id/mTitle"
+            fontPath="fonts/vazir.ttf"
+            tools:ignore="MissingPrefix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:inputType="text"
+            android:hint="عنوان سوال خود را بنویسید."
+            android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                fontPath="fonts/vazir.ttf"
+                tools:ignore="MissingPrefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="right"
+                android:layout_margin="10dp"
+                android:textSize="19sp"
+                android:text="متن سوال"/>
+
+            <EditText
+                android:textAlignment="viewEnd"
+                android:maxLength="500"
+                android:id="@+id/mQText"
+                fontPath="fonts/vazir.ttf"
+                tools:ignore="MissingPrefix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:hint="متن سوال خود را تا حد امکان کامل بنویسید."
+                android:textColor="@color/colorPrimary"
+                android:gravity="end" />
+
+            <TextView
+                android:id="@+id/mTextCounter"
+                fontPath="fonts/vazir.ttf"
+                tools:ignore="MissingPrefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="left"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="16sp"
+                android:text="0/500"/>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            
+            <Switch
+                android:id="@+id/mIsPublic"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOn="بله"
+                android:textOff="خیر"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                fontPath="fonts/vazir.ttf"
+                tools:ignore="MissingPrefix"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="13sp"
+                android:text="سوال من به عنوان سوال متداول برای همه نمایش داده شود."/>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                fontPath="fonts/vazir.ttf"
+                tools:ignore="MissingPrefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="right"
+                android:layout_margin="10dp"
+                android:textSize="19sp"
+                android:text="راهنما"/>
+
+
+            <TextView
+
+                fontPath="fonts/vazir.ttf"
+                tools:ignore="MissingPrefix"
+                android:maxLines="4"
+                android:lines="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:inputType="textMultiLine"
+                android:text="@string/helpTxt"
+                android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_marginBottom="10dp"
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_radius="10dp"
+        fancy:fb_text="ثبت و ارسال"
+        fancy:fb_textSize="20sp"
+        android:id="@+id/mMovakelBtn"
+        fancy:fb_textFont="fonts/vazir.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="ثبت و ارسال"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>
+

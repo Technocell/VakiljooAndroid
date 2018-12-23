@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    tools:context=".LoginRegister"
+    android:background="@drawable/main_back">
+
+
+    <TextView
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/mMoshakhasatTxt"
+        android:layout_marginTop="60dp"
+        fontPath="fonts/vazir.ttf"
+        tools:ignore="MissingPrefix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/inputYourData"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+       />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:id="@+id/mRegCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mMoshakhasatTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="97dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/mName"
+                android:textColor="@color/colorPrimary"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="نام"
+                android:inputType="text"
+                android:paddingEnd="10dp"
+                tools:ignore="MissingPrefix" />
+
+            <EditText
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/mFamily"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="نام خانوادگی"
+                android:inputType="text"
+                android:paddingEnd="10dp"
+                tools:ignore="MissingPrefix" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:editable="false"
+                    android:focusable="false"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:ems="3"
+                    android:hint="+98 "
+                    android:paddingEnd="10dp"
+                    tools:ignore="MissingPrefix" />
+
+
+
+                <EditText
+                    android:id="@+id/mNumber"
+                    android:textColor="@color/colorPrimary"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="9337335323"
+                    android:inputType="phone"
+                    android:paddingEnd="10dp"
+                    tools:ignore="MissingPrefix" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        fancy:fb_textFont="fonts/vazir.ttf"
+        android:id="@+id/mRegisterBtn"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="50dp"
+
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_radius="10dp"
+        fancy:fb_text="ثبت نام / ورود "
+        fancy:fb_textSize="25sp" />
+
+
+</RelativeLayout>

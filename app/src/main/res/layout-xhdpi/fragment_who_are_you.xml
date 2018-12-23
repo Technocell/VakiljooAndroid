@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WhoAreYou"
+    android:background="@drawable/who">
+
+
+    <TextView
+        fontPath="fonts/vazir.ttf"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:textColor="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="45dp"
+        android:text="@string/whoAreYou"
+        android:textSize="68sp"
+        tools:ignore="MissingPrefix" />
+
+    <LinearLayout
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <Button
+        fontPath="fonts/vazir.ttf"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:id="@+id/mVakilBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_back"
+        android:text="@string/iamVakil"
+        tools:ignore="MissingPrefix" />
+
+    <Button
+        fontPath="fonts/vazir.ttf"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:id="@+id/mMovakelBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_back"
+        android:text="@string/iamMovakel"
+        tools:ignore="MissingPrefix" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

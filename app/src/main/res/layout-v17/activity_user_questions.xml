@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:weightSum="4"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserQuestionsActivity"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto">
+
+    <include  layout="@layout/layout_toolbar_top"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mMySoalsRecycler"
+        android:layout_weight="4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        fancy:fb_textFont="fonts/vazir.ttf"
+        tools:ignore="MissingPrefix"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/mNewQuestionBtn"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/mVerifyCode"
+        android:layout_centerHorizontal="true"
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_radius="10dp"
+        fancy:fb_text="ثبت سوال جدید"
+        fancy:fb_textSize="20sp" />
+
+    <include
+        android:layout_weight="1" layout="@layout/bottom_layout_client"
+        android:layout_height="53dp"
+        android:layout_width="match_parent" />
+
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="5dp">
+
+            <EditText
+                android:textAlignment="viewEnd"
+                android:minLines="7"
+                android:id="@+id/mAboutMeText"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:hint="درباره ی خودتان بنویسید ..."
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                tools:ignore="MissingPrefix"
+                android:gravity="end" />
+        </androidx.cardview.widget.CardView>
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        fancy:fb_textFont="fonts/vazir.ttf"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:id="@+id/mSendAboutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_radius="10dp"
+        fancy:fb_text="ثبت و ارسال"
+        fancy:fb_textSize="18sp" />
+</LinearLayout>

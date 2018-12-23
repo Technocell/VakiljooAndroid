@@ -14,9 +14,9 @@
     <ss.com.bannerslider.Slider
         android:id="@+id/mSlider"
         android:layout_width="match_parent"
-        android:layout_height="540px" />
+        android:layout_height="350px" />
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardElevation="8dp">
@@ -38,7 +38,7 @@
                 fancy:fb_defaultColor="@color/colorPrimary"
                 fancy:fb_text="سوالات متداول"
                 fancy:fb_textFont="fonts/vazir.ttf"
-                fancy:fb_textSize="25sp" />
+                fancy:fb_textSize="18sp" />
 
 
             <mehdi.sakout.fancybuttons.FancyButton
@@ -52,10 +52,10 @@
                 fancy:fb_text="وکلای برتر"
                 fancy:fb_textColor="@color/colorPrimary"
                 fancy:fb_textFont="fonts/vazir.ttf"
-                fancy:fb_textSize="25sp" />
+                fancy:fb_textSize="18sp" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
         android:orientation="vertical"
         android:weightSum="1">
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
 
             android:id="@+id/mTopsViewPager"
             android:layout_width="match_parent"

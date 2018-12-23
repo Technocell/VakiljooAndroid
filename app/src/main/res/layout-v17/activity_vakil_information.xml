@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context=".Activity.VakilInformationActivity">
+
+
+
+    <include layout="@layout/layout_toolbar_top"/>
+
+        <LinearLayout
+            android:weightSum="2"
+            android:id="@+id/relative_infio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/line_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/mDName"
+                    android:layout_gravity="end"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:textColor="@color/green_blue_color"
+                    android:textSize="18sp"
+                    tools:ignore="MissingPrefix" />
+
+
+                <TextView
+                    android:layout_gravity="end"
+                    android:id="@+id/mDFamily"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/family_name"
+                    android:textColor="@color/green_blue_color"
+                    android:textSize="18sp"
+                    tools:ignore="MissingPrefix" />
+            </LinearLayout>
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_weight="1"
+                android:id="@+id/profile_image"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/vakile_profile"
+                app:civ_border_color="@color/green_blue_color"
+                app:civ_border_width="3dp"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/relative_infio"
+            android:background="@color/green_blue_color" />
+
+    <androidx.cardview.widget.CardView
+        card_view:cardElevation="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                fancy:fb_textFont="fonts/vazir.ttf"
+                android:layout_weight="1"
+                android:id="@+id/mContactWays"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/mVerifyCode"
+                android:layout_centerHorizontal="true"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_text="راه های تماس"
+                fancy:fb_textSize="18sp" />
+
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                fancy:fb_textFont="fonts/vazir.ttf"
+                android:layout_weight="1"
+                android:id="@+id/mAboutMe"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/mVerifyCode"
+                android:layout_centerHorizontal="true"
+                fancy:fb_defaultColor="@color/white"
+                fancy:fb_text="درباره من"
+                fancy:fb_textColor="@color/colorPrimary"
+                fancy:fb_textSize="18sp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+<LinearLayout
+    android:layout_weight="2"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_weight="1"
+        android:id="@+id/mVakilInfoPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <include
+        layout="@layout/bottom_layout__hq_client"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</LinearLayout>
+
+
+</LinearLayout>
+
+

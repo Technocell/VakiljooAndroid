@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".TopVakilsFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/mTopVakilsRecycler"
         android:layout_width="match_parent"

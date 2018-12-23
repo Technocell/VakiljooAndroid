@@ -9,7 +9,7 @@
     tools:context=".HqClient"
     tools:showIn="@layout/app_bar_hq_client">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_marginBottom="45dp"
         android:id="@+id/mRecyclerview"
         android:layout_width="match_parent"

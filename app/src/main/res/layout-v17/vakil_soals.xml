@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="@color/trans"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" >
+
+
+
+        <RelativeLayout
+            android:layout_margin="10dp"
+            android:background="@drawable/my_questions_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/mUserImage"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/vakile_profile"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp" />
+
+            <LinearLayout
+                android:layout_width="279dp"
+                android:layout_height="89dp"
+                android:layout_alignTop="@+id/mTVakilImage"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="107dp"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mTitle"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="30"
+                    android:text="عنوان"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    tools:ignore="MissingPrefix" />
+
+
+                <TextView
+                    android:layout_marginEnd="5dp"
+                    android:maxLength="150"
+                    android:id="@+id/mText"
+                    fontPath="fonts/vazir.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="58dp"
+                    android:text="@string/helpTxt"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    tools:ignore="MissingPrefix" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/mGroup"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="5dp"
+                android:maxLength="10"
+                android:text="دسته سوال"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/mDate"
+                fontPath="fonts/vazir.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1397/08/08 : 13:30"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                tools:ignore="MissingPrefix" />
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>
