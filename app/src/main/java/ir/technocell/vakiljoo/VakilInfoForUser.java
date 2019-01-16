@@ -42,6 +42,7 @@ import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+import ir.technocell.vakiljoo.Activity.CurrentInMapActivity;
 import ir.technocell.vakiljoo.Activity.HqActivity;
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -92,6 +93,13 @@ public class VakilInfoForUser extends AppCompatActivity {
     }
     private void BottomMenuOperations()
     {
+        mMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent go = new Intent(VakilInfoForUser.this,CurrentInMapActivity.class);
+                startActivity(go);
+            }
+        });
         mTrhSoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
